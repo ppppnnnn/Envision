@@ -25,20 +25,20 @@ Envision 基于`AGPL3.0`开源协议，意味着任何想要获取源代码，�
 2018年11月26日，Envision 第一个版本诞生了。没有下面这些人的努力，Envision将永远不会面世。
 
 - v0.0.1a 开发团队
- - Owen Tsai, 项目主策划，前端开发，0.0.1a版本前端负责人。
- - Hooyan, 前端开发。
- - KnowCherish, 后端开发，数据库架构。
- - Murren-pf 前端开发，Logo设计。
- - Nan Peng, 前端开发。
- - Jhon, 后端开发，数据库架构，0.0.1a版本后端负责人。
- - Ian Wong, 前端开发。
- - 1019157263， 后端开发。
+  - Owen Tsai, 项目主策划，前端开发，0.0.1a版本前端负责人。
+  - Hooyan, 前端开发。
+  - KnowCherish, 后端开发，数据库架构。
+  - Murren-pf 前端开发，Logo设计。
+  - Nan Peng, 前端开发。
+  - Jhon, 后端开发，数据库架构，0.0.1a版本后端负责人。
+  - Ian Wong, 前端开发。
+  - 1019157263， 后端开发。
  
 - v1.1.0a 开发团队
- - Owen Tsai, 项目主策划，前/后端开发，版本负责人。
- - KnowCherish, 后端开发，数据库架构，服务端负责人。
- - Hooyan, 前端开发，客户端负责人。
- - Murren-pf 前端开发，Logo设计。
- - Nan Peng, 前端开发。
- - Ian Wong, 前端开发。
+  - Owen Tsai, 项目主策划，前/后端开发，版本负责人。
+  - KnowCherish, 后端开发，数据库架构，服务端负责人。
+  - Hooyan, 前端开发，客户端负责人。
+  - Murren-pf 前端开发，Logo设计。
+  - Nan Peng, 前端开发。
+  - Ian Wong, 前端开发。
  
