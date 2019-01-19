@@ -12,7 +12,7 @@ Envision，中文名称“因问”，是人工智能技术协会官方应用，
 
 Envision 集成文章管理、任务日程、论坛、群组、社团事务、直答和信息流推送等多项功能。Envision 计划部署在Web, IOS, Android, Linux和PC Desktop等多个平台/OS，并不断改善和迭代，提供更符合协会和成员需要的功能。
 
-Envision 是完全免费开源的，由志愿者们进行开发和维护。[查看我们的贡献者名单](#-贡献者名单)来认识一下这些伟大的人吧！如果你也想知道如何向Envision 的开发和维护做出自己的贡献，请点击查看[Envision 贡献指南](#)。
+Envision 是完全免费开源的，由志愿者们进行开发和维护。[查看我们的贡献者名单](#贡献者名单)来认识一下这些伟大的人吧！如果你也想知道如何向Envision 的开发和维护做出自己的贡献，请点击查看[Envision 贡献指南](https://github.com/AAIT-SUSE/Envision/blob/master/documentations/Contribution.md)。
 
 ## 许可协议
 
