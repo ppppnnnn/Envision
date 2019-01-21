@@ -23,6 +23,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -33,6 +34,15 @@ export default {
     return {
       //
     }
-  }
+  },
+  mounted() {
+    axios.get('http://127.0.0.1:8000/index/')
+    .then(function(response){
+      console.log(response)
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
+  },
 }
 </script>
