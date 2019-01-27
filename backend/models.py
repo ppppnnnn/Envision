@@ -40,6 +40,18 @@ class UserAccount(models.Model):
 class UserToken(models.Model):
     owner              =   models.OneToOneField(User,on_delete=models.CASCADE)
     token              =   models.CharField(max_length=64)
+    class Meta:
+        db_table = 'user_token'
+
+
+class Announcement(models.Model):
+    announcement_id    =   models.AutoField(primary_key=True)
+    author_id          =   models.IntegerField(blank=True,null=True)
+    create_time        =   models.DateTimeField(blank=True,null=True)
+    topic              =   models.CharField(max_length=45)
+    content            =   models.TextField(blank=True,null=True)
+    class Meta:
+        db_table = 'announcement'
 
 
 class Article(models.Model):
@@ -77,7 +89,7 @@ class ArticleCommentReply(models.Model):
 class Section(models.Model):
     section_id         =   models.AutoField(primary_key=True)
     create_time        =   models.DateTimeField()
-    theme              =   models.CharField(blank=True,null=True)
+    theme              =   models.CharField(max_length=45,blank=True,null=True)
     description        =   models.TextField(blank=True,null=True)
     class Meta:
         db_table = 'section'
@@ -119,7 +131,7 @@ class DirectAnswer(models.Model):
     direct_answer_id   =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField()
     create_time        =   models.DateTimeField()
-    tag                =   models.CharField(max_length=90,blan=True,null=True)
+    tag                =   models.CharField(max_length=90,blank=True,null=True)
     question           =   models.CharField(max_length=200,blank=True,null=True)
     description        =   models.TextField(blank=True,null=True)
     invited_person_id  =   models.CharField(max_length=90,blank=True,null=True)
@@ -148,8 +160,44 @@ class Group(models.Model):
         db_table = 'group'
 
 
-class GroupBulletin(models.Model):
-    group_bulletin_id  =   models.AutoField(primary_key=True)
+class GroupAnnouncement(models.Model):
+    announcement_id    =   models.AutoField(primary_key=True)
     group_id           =   models.IntegerField()
     create_time        =   models.DateTimeField()
     topic              =   models.CharField(max_length=90,blank=True,null=True)
+    content            =   models.TextField(blank=True,null=True)
+    class Meta:
+        db_table = 'group_bulletin'
+
+
+class GroupActivity(models.Model):
+    group_activity_id  =   models.AutoField(primary_key=True)
+    group_id           =   models.IntegerField()
+    start_time         =   models.DateTimeField(blank=True,null=True)
+    end_time           =   models.DateTimeField(blank=True,null=True)
+    topic              =   models.CharField(max_length=90)
+    content            =   models.TextField(blank=True,null=True)
+    activity_admin_id  =   models.CharField(max_length=45,blank=True,null=True)
+    class Meta:
+        db_table = 'group_activity'
+
+
+#----------------------群组学习任务、学习资料等-----------
+#-------------------------------------------------------
+
+class LearningTask(models.Model):
+    task_id            =   models.AutoField(primary_key=True)
+    author_id          =   models.IntegerField()
+    start_time         =   models.DateField()
+    end_time           =   models.DateTimeField(blank=True,null=True)
+    tag                =   models.CharField(max_length=45,blank=True,null=True)
+    topic              =   models.CharField(max_length=45,blank=True,null=True)
+    content            =   models.TextField(blank=True,null=True)
+    is_supervise       =   models.IntegerField(blank=True,null=True)
+    is_end             =   models.IntegerField(blank=True,null=True)
+    class Meta:
+        db_table = 'learning_task'
+
+
+
+
