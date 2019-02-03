@@ -1,7 +1,14 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
-from .models import User,UserAccount,UserToken,Article,ArticleComment,ArticleCommentReply,Announcement,Group,GroupActivity
-from .models import GroupAnnouncement,LearningTask,Section,Post,PostComment,PostCommentReply,DirectAnswer,DirectAnswerAnswer
+from .models import User,UserAccount,UserToken,Article,ArticleComment,ArticleCommentReply,GroupLearningTask
+from .models import GroupAnnouncement,LearningTask,Section,Post,PostComment,PostCommentReply,GroupLearningTaskSubmit
+from .models import Administrators,DirectAnswerAnswer,Announcement,Group,GroupActivity,DirectAnswer,GroupLearningMaterials
+
+
+class AdministratorsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model   =  Administrators
+        fields  =  ('administrators','uid')
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -67,20 +74,37 @@ class DirectAnswerAnswerSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model   =  Group
-        fields  =  ('group_id','group_name','group_admin_id','description','create_time','group_member_id')
+        fields  =  ('group_id','group_name','group_admin_id','description','create_time','group_member_id','degree_of_activity')
 
 
 class GroupAnnouncementSerializer(serializers.ModelSerializer):
     class Meta:
-        model   =  GroupActivity
+        model   =  GroupAnnouncement
         fields  =  ('announcement_id','group_id','create_time','topic','content')
 
 
 class GroupActivitySerializer(serializers.ModelSerializer):
     class Meta:
-        model   =  GroupAnnouncement
-        fields  =  ('group_activity_id','group_id','start_time','end_time','topic','content','activity_admin_id')
+        model   =  GroupActivity
+        fields  =  ('group_activity_id','group_id','start_time','end_time','topic','content','is_end')
 
+
+class GroupLearningTaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model   =  GroupLearningTask
+        fields  =  ('task_id','group_id','publisher_id','topic','description','start_time','end_time','is_end')
+
+
+class GroupLearningTaskSubmitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model   =  GroupLearningTaskSubmit
+        fields  =  ('task_submit_id','task_id','group_id','author_id','create_time','content','score')
+
+
+class GroupLearningMaterialsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model   =  GroupLearningMaterials
+        fields  =  ('materials_id','author_id','group_id','create_time','content')
 
 class LearningTaskSerializer(serializers.ModelSerializer):
     class Meta:
@@ -101,14 +125,13 @@ class UserAccountSerializer(serializers.ModelSerializer):
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
-    confirm_password = serializers.CharField(required=True)
     class Meta:
         model   =  User
-        fields  =  ('username','e_mail','password','confirm_password')
+        fields  =  ('username','e_mail','password')
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
-    email_or_username = serializers.CharField(max_length=90,allow_blank=False)
+    email_or_username = serializers.CharField(required=True)
     class Meta:
         model   =  User
         fields  =  ('email_or_username','password')

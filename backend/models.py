@@ -4,6 +4,13 @@ import random
 # Create your models here.
 
 
+class Administrators(models.Model):
+    administrators_id  =   models.AutoField(primary_key=True)
+    uid                =   models.IntegerField(blank=True,null=True)
+    class Meta:
+        db_table = 'administrators'
+
+
 class User(models.Model):
     uid                =   models.AutoField(primary_key=True)
     username           =   models.CharField(max_length=45)
@@ -20,6 +27,7 @@ class User(models.Model):
     #加盐腌制密码并保存
     def save(self,*args,**kwargs):
         ch = 'fhuendhsgjlsmlmnvjjsljlsmn'
+        self.salt = ''
         for i in range(10):
             self.salt += (list(ch)[random.randint(0,25)])
         for i in range(2):
@@ -77,7 +85,7 @@ class ArticleComment(models.Model):
 
 class ArticleCommentReply(models.Model):
     comment_reply_id   =   models.AutoField(primary_key=True)
-    article_id         =   models.IntegerField()
+    article_id         =   models.IntegerField(blank=True,null=True)
     comment_id         =   models.IntegerField()
     author_id          =   models.IntegerField()
     create_time        =   models.DateTimeField()
@@ -89,7 +97,7 @@ class ArticleCommentReply(models.Model):
 class Section(models.Model):
     section_id         =   models.AutoField(primary_key=True)
     create_time        =   models.DateTimeField()
-    theme              =   models.CharField(max_length=45,blank=True,null=True)
+    theme              =   models.CharField(max_length=45)
     description        =   models.TextField(blank=True,null=True)
     class Meta:
         db_table = 'section'
@@ -98,7 +106,7 @@ class Section(models.Model):
 class Post(models.Model):
     post_id            =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField(blank=True,null=True)
-    section_id         =   models.IntegerField(blank=True,null=True)
+    section_id         =   models.IntegerField()
     create_time        =   models.DateTimeField()
     topic              =   models.CharField(max_length=200)
     content            =   models.TextField(blank=True,null=True)
@@ -119,7 +127,7 @@ class PostComment(models.Model):
 class PostCommentReply(models.Model):
     comment_reply_id   =   models.AutoField(primary_key=True)
     comment_id         =   models.IntegerField()
-    post_id            =   models.IntegerField()
+    post_id            =   models.IntegerField(blank=True,null=True)
     author_id          =   models.IntegerField()
     create_time        =   models.DateTimeField()
     content            =   models.TextField()
@@ -132,7 +140,7 @@ class DirectAnswer(models.Model):
     author_id          =   models.IntegerField()
     create_time        =   models.DateTimeField()
     tag                =   models.CharField(max_length=90,blank=True,null=True)
-    question           =   models.CharField(max_length=200,blank=True,null=True)
+    question           =   models.CharField(max_length=200)
     description        =   models.TextField(blank=True,null=True)
     invited_person_id  =   models.CharField(max_length=90,blank=True,null=True)
     class Meta:
@@ -156,6 +164,7 @@ class Group(models.Model):
     description        =   models.TextField(blank=True,null=True)
     create_time        =   models.DateTimeField()
     group_member_id    =   models.CharField(max_length=200,blank=True,null=True)
+    degree_of_activity =   models.IntegerField(blank=True,null=True)
     class Meta:
         db_table = 'group'
 
@@ -164,7 +173,7 @@ class GroupAnnouncement(models.Model):
     announcement_id    =   models.AutoField(primary_key=True)
     group_id           =   models.IntegerField()
     create_time        =   models.DateTimeField()
-    topic              =   models.CharField(max_length=90,blank=True,null=True)
+    topic              =   models.CharField(max_length=90)
     content            =   models.TextField(blank=True,null=True)
     class Meta:
         db_table = 'group_bulletin'
@@ -173,16 +182,50 @@ class GroupAnnouncement(models.Model):
 class GroupActivity(models.Model):
     group_activity_id  =   models.AutoField(primary_key=True)
     group_id           =   models.IntegerField()
-    start_time         =   models.DateTimeField(blank=True,null=True)
+    start_time         =   models.DateTimeField()
     end_time           =   models.DateTimeField(blank=True,null=True)
     topic              =   models.CharField(max_length=90)
     content            =   models.TextField(blank=True,null=True)
-    activity_admin_id  =   models.CharField(max_length=45,blank=True,null=True)
+    is_end             =   models.IntegerField(blank=True,null=True)
     class Meta:
         db_table = 'group_activity'
 
 
 #----------------------群组学习任务、学习资料等-----------
+class GroupLearningTask(models.Model):
+    task_id            =   models.AutoField(primary_key=True)
+    group_id           =   models.IntegerField()
+    publisher_id       =   models.IntegerField(blank=True,null=True)
+    topic              =   models.CharField(max_length=45)
+    description        =   models.TextField(blank=True,null=True)
+    start_time         =   models.DateTimeField()
+    end_time           =   models.DateTimeField(blank=True,null=True)
+    is_end             =   models.IntegerField(blank=True,null=True)
+    class Meta:
+        db_table = 'group_learning_task'
+
+
+class GroupLearningTaskSubmit(models.Model):
+    task_submit_id     =   models.AutoField(primary_key=True)
+    task_id            =   models.IntegerField()
+    group_id           =   models.IntegerField(blank=True,null=True)
+    author_id          =   models.IntegerField()
+    create_time        =   models.DateTimeField()
+    content            =   models.TextField()
+    score              =   models.IntegerField(blank=True,null=True)
+    class Meta:
+        db_table = 'task_submit'
+
+
+class GroupLearningMaterials(models.Model):
+    materials_id       =   models.AutoField(primary_key=True)
+    author_id          =   models.IntegerField()
+    group_id           =   models.IntegerField()
+    create_time        =   models.DateTimeField()
+    content            =   models.FileField()
+    class Meta:
+        db_table = 'group_learning_materials'
+
 #-------------------------------------------------------
 
 class LearningTask(models.Model):
@@ -191,7 +234,7 @@ class LearningTask(models.Model):
     start_time         =   models.DateField()
     end_time           =   models.DateTimeField(blank=True,null=True)
     tag                =   models.CharField(max_length=45,blank=True,null=True)
-    topic              =   models.CharField(max_length=45,blank=True,null=True)
+    topic              =   models.CharField(max_length=45)
     content            =   models.TextField(blank=True,null=True)
     is_supervise       =   models.IntegerField(blank=True,null=True)
     is_end             =   models.IntegerField(blank=True,null=True)
