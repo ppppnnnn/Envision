@@ -3,7 +3,11 @@
     <app-toolbar></app-toolbar>
     <app-side-menu></app-side-menu>
     <app-right-side-panel></app-right-side-panel>
+
     <v-content>
+      <v-container>
+        <question></question>
+      </v-container>
     </v-content>
   </v-app>
 </template>
@@ -12,6 +16,7 @@
 import AppToolbar from './components/AppToolbar'
 import AppSideMenu from './components/AppSideMenu'
 import AppRightSidePanel from './components/AppRightSidePanel'
+import Question from './views/Questions'
 import axios from 'axios'
 
 export default {
@@ -19,7 +24,8 @@ export default {
   components: {
     AppToolbar,
     AppSideMenu,
-    AppRightSidePanel
+    AppRightSidePanel,
+    Question,
   },
   data () {
     return {
@@ -37,4 +43,3 @@ export default {
   },
 }
 </script>
-

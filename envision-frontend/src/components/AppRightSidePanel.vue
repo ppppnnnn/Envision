@@ -12,12 +12,13 @@
         <v-img
           class="white--text"
           height="200px"
-          src='https://unity3d.com/sites/default/files/styles/frontpage_promo_large_background/public/unity-front-header_1.jpg?itok=KK6yypMW'
+          :src=topNewsImg
+          @click=";"
         >
           <v-container fill-height fluid>
             <v-layout fill-height>
               <v-flex xs12 align-end flexbox>
-                <span class="headline">Unity 2019 的十大新特性</span>
+                <span class="headline">{{ topNewsTitle }}</span>
               </v-flex>
             </v-layout>
           </v-container>
@@ -34,10 +35,11 @@
 
       <v-card flat class="grey lighten-5">
         <v-card-text style="padding: 8px;">
+          <a class="footer-link" href="https://github.com/AAIT-SUSE/Envision">源代码</a>
           <a class="footer-link">关于我们</a>
-          <a class="footer-link">联系我们</a>
           <a class="footer-link">加入我们</a>
           <a class="footer-link">许可协议</a>
+          <a class="footer-link">违法违规行为举报</a><br>
           <a class="footer-link">版权所有(c)aait-suse</a>
         </v-card-text>
       </v-card>
@@ -47,7 +49,9 @@
 <script>
 export default {
   data: () => ({
-    drawer: null
+    drawer: null,
+    topNewsTitle: 'Unity 2019 的十大新特性',
+    topNewsImg: 'https://unity3d.com/sites/default/files/styles/frontpage_promo_large_background/public/unity-front-header_1.jpg?itok=KK6yypMW'
   })
 }
 </script>
@@ -58,6 +62,7 @@ export default {
     margin-right: 12px;
     margin-left: 12px;
     color: grey;
+    text-decoration: none;
   }
 
   .footer-link:hover {
