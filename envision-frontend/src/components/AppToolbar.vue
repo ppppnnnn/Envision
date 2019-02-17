@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar :color="userColorTheme" app absolute clipped-left>
+  <v-toolbar :color="userColorTheme" app clipped-left fixed>
     <span class="title ml-3 mr-5">Envision&nbsp;<span class="slim-text">Web</span></span>
     <v-spacer></v-spacer>
   

@@ -2,13 +2,18 @@
   <v-app>
     <app-toolbar></app-toolbar>
     <app-side-menu></app-side-menu>
-    <app-right-side-panel></app-right-side-panel>
 
-    <v-content>
-      <v-container>
-        <question></question>
+    <v-content style="padding-right: 300px;">
+      <v-container fluid>
+        <v-layout>
+          <v-flex shrink style="width: 100%;">
+            <question></question>
+          </v-flex>
+        </v-layout>
       </v-container>
     </v-content>
+
+    <app-right-side-panel></app-right-side-panel>
   </v-app>
 </template>
 
@@ -43,3 +48,9 @@ export default {
   },
 }
 </script>
+
+<style>
+  * {
+    font-family: 等线, Serif,sans-serif;
+  }
+</style>
