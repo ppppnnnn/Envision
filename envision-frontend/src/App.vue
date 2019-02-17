@@ -7,7 +7,7 @@
       <v-container fluid>
         <v-layout>
           <v-flex shrink style="width: 100%;">
-            <question></question>
+            <router-view></router-view>
           </v-flex>
         </v-layout>
       </v-container>
@@ -21,7 +21,6 @@
 import AppToolbar from './components/AppToolbar'
 import AppSideMenu from './components/AppSideMenu'
 import AppRightSidePanel from './components/AppRightSidePanel'
-import Question from './views/Questions'
 import axios from 'axios'
 
 export default {
@@ -30,7 +29,6 @@ export default {
     AppToolbar,
     AppSideMenu,
     AppRightSidePanel,
-    Question,
   },
   data () {
     return {
@@ -38,13 +36,13 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://127.0.0.1:8000/index/')
-    .then(function(response) {
-      console.log(response)
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
+    // axios.get('http://127.0.0.1:8000/index/')
+    // .then(function(response) {
+    //   console.log(response)
+    // })
+    // .catch(function(error) {
+    //   console.log(error)
+    // })
   },
 }
 </script>

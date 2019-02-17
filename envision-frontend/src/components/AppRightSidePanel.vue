@@ -13,7 +13,7 @@
         class="white--text"
         height="200px"
         :src=topNewsImg
-        @click=";"
+        @click=""
       >
         <v-container fill-height fluid>
           <v-layout fill-height>
@@ -49,7 +49,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: null,
+    drawerRight: null,
     topNewsTitle: 'Unity 2019 的十大新特性',
     topNewsImg: 'https://unity3d.com/sites/default/files/styles/frontpage_promo_large_background/public/unity-front-header_1.jpg?itok=KK6yypMW'
   })

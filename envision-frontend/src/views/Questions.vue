@@ -2,9 +2,14 @@
   <div>
     <p class="display-1">直答<span class="font-weight-thin"> Direct Answer</span></p>
 
+    <div class="question-tags">
+      <p>按标签筛选：</p>
+
+    </div>
+
     <div class="question-list">
       <v-card v-for="item in questions" :key="item.id" class="mb-2">
-        <v-card-title primary-title>
+        <v-card-title primary-title class="question-title">
           <div>
             <div class="headline">{{ item.title }}</div>
             <span class="grey--text">由 {{ item.po }} 在 {{ item.time }} 提出, 已有 {{ item.answerCount }} 个回答</span>
@@ -16,8 +21,8 @@
             <v-flex xs12 v-if="item.image == null">
               <span class="font-weight-bold">{{ item.topResponder }}</span> : {{ item.answer }}
             </v-flex>
-            <v-flex xs8 v-if="item.image != null">
-              {{ item.answer }}
+            <v-flex xs8 v-if="item.image != null" class="question-text">
+              <span class="font-weight-bold">{{ item.topResponder }}</span> : {{ item.answer }}
             </v-flex>
             <v-flex xs4 v-if="item.image != null">
               <v-img
@@ -69,7 +74,7 @@ export default {
         answerCount: '2',
         image: 'http://img3.imgtn.bdimg.com/it/u=4036543105,586481454&fm=11&gp=0.jpg',
         topResponder: 'James White',
-        answer: '这个错误反映除了你对指针的了解并不是很充足。你从图中可以看出，这段代码的主要目的在于什么我也不知道，我这段回答主要是为了测试一下显示文字是否是正常的。这个错误反映除了你对指针的了解并不是很充足。你从图中可以看出，这段代码的主要目的在于什么我也不知道，我这段回答主要是为了测试一下显示文字是否是正常的.这个错误反映除了你对指针的了解并不是很充足。你从图中可以看出，这段代码的主要目的在于什么我也不知道...'
+        answer: '这个错误反映除了你对指针的了解并不是很充足。你从图中可以看出，这段代码的主要目的在于什么我也不知道，我这段回答主要是为了测试一下显示文字是否是正常的。这个错误反映除了你对指针的了解并不是很充足。你从图中可以看出，这段代码的主要目的在于什么我也不知道，我这段回答主要是为了测试一下显示文字是否是正常的.这个错误反映除了你对指针的了解并不是很充足。你从图中可以看出...'
       }
    ]
   })
@@ -77,5 +82,13 @@ export default {
 </script>
 
 <style scoped>
+  /* Add a right padding to separate text and image */
+  .question-text {
+    padding-right: 20px;
+  }
 
+  /* Decrease default padding between card-title and card-text */
+  .question-title {
+    padding-bottom: 0;
+  }
 </style>
