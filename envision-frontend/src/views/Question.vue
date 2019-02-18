@@ -77,7 +77,7 @@
         },
         {
           id: 2,
-          responder: '错误示范专家',
+          responder: '错误示范',
           responderAvatar: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
           time: '2019/2/18',
           content: '<p>楼上说得很好，我完全同意楼上的说法。</p>',

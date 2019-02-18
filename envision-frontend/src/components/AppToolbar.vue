@@ -71,6 +71,6 @@ export default {
 
 <style>
 .slim-text {
-  font-weight: 350;
+  font-weight: 300;
 }
 </style>

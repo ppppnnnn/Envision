@@ -3,8 +3,10 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
+
 const questions = () => import('@/views/Questions');
 const question = () => import('@/views/Question');
+
 
 const routes = [
   {
