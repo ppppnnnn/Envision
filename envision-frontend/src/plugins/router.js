@@ -6,9 +6,18 @@ Vue.use(VueRouter);
 
 const questions = () => import('@/views/Questions');
 const question = () => import('@/views/Question');
+const editor = () => import('@/components/TextEditorFull');
 
 
 const routes = [
+  {
+    path: '/',
+    component: editor
+  },
+  {
+    path: '/questions/new',
+    component: editor
+  },
   {
     path: '/questions',
     name: 'questions',

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "highlight.js": "^9.14.2",
     "tiptap": "^1.8.0",
     "vue": "^2.5.21",
     "vue-quill-editor": "^3.0.6",
