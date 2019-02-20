@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p class="display-1">创建主题帖<span class="font-weight-thin"> New Post</span></p>
     <v-layout wrap row>
       <v-flex class="px-4" xs6>
         <v-text-field label="填写帖子主题:"></v-text-field>

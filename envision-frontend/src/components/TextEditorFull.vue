@@ -33,6 +33,6 @@
 
 <style>
   .ql-container {
-    min-height: 350px;
+    min-height: 300px;
   }
 </style>

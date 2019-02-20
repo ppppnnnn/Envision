@@ -83,7 +83,8 @@ export default {
     createItems: [
       { title: '新文章', link: '/articles/new' },
       { title: '新帖子', link: '/posts/new' },
-      { title: '新问题', link: '/questions/new' }
+      { title: '新问题', link: '/questions/new' },
+      { title: '从草稿创建', link: '/draft' }
     ]
   })
 }
