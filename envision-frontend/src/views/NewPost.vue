@@ -1,15 +1,16 @@
 <template>
   <div>
     <v-layout wrap row>
-      <v-flex class="px-4">
+      <v-flex class="px-4" xs6>
         <v-text-field label="填写帖子主题:"></v-text-field>
       </v-flex>
-      <v-flex class="px-4">
+      <v-flex class="px-4" xs6>
         <v-select :items="sectionSelect" label="选择发布版块:"></v-select>
       </v-flex>
     </v-layout>
 
-    <envision-editor></envision-editor>
+
+    <envision-editor class="mt-4"></envision-editor>
     <v-layout row wrap>
       <v-flex class="px-4">
         <v-btn block>保存为草稿</v-btn>
