@@ -4,8 +4,13 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 
+const newArticle =() => import('@/views/NewArticle');
+const newPost = () => import('@/views/NewPost');
+const newQuestion = () => import('@/views/NewQuestion');
 const questions = () => import('@/views/Questions');
 const question = () => import('@/views/Question');
+
+
 const editor = () => import('@/components/TextEditorFull');
 
 
@@ -15,8 +20,16 @@ const routes = [
     component: editor
   },
   {
+    path: '/articles/new',
+    component: newArticle
+  },
+  {
+    path: '/posts/new',
+    component: newPost
+  },
+  {
     path: '/questions/new',
-    component: editor
+    component: newQuestion
   },
   {
     path: '/questions',

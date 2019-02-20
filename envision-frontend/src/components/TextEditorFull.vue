@@ -30,3 +30,9 @@
     })
   }
 </script>
+
+<style>
+  .ql-container {
+    min-height: 350px;
+  }
+</style>
