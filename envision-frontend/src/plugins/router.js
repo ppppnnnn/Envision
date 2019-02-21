@@ -3,21 +3,23 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-
+const group = () => import('@/views/Group');
 const newArticle =() => import('@/views/NewArticle');
 const newPost = () => import('@/views/NewPost');
 const newQuestion = () => import('@/views/NewQuestion');
-const questions = () => import('@/views/Questions');
 const question = () => import('@/views/Question');
-
-
-const editor = () => import('@/components/TextEditorFull');
+const questions = () => import('@/views/Questions');
 
 
 const routes = [
   {
     path: '/',
-    component: editor
+    component: group,
+    children: [
+      {
+        path: ''
+      }
+    ]
   },
   {
     path: '/articles/new',
