@@ -47,13 +47,15 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    drawerRight: null,
-    topNewsTitle: 'Unity 2019 的十大新特性',
-    topNewsImg: 'https://unity3d.com/sites/default/files/styles/frontpage_promo_large_background/public/unity-front-header_1.jpg?itok=KK6yypMW'
-  })
-}
+  import unityBg from '../assets/unity_bg.jpg'
+
+  export default {
+    data: () => ({
+      drawerRight: null,
+      topNewsTitle: 'Unity 2019 的十大新特性',
+      topNewsImg: unityBg
+    })
+  }
 </script>
 
 <style scoped>

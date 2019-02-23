@@ -20,16 +20,19 @@
         color="pink"
         slider-color="yellow"
       >
-        <v-tab>群组概览</v-tab>
-        <v-tab>群组成员</v-tab>
+        <v-tab to="/group/general">群组概览</v-tab>
+        <v-tab to="/group/members">群组成员</v-tab>
         <v-tab>活动与公告</v-tab>
         <v-tab>学习资料</v-tab>
         <v-tab>学习任务</v-tab>
       </v-tabs>
     </v-toolbar>
-
     <v-tabs-items>
-
+      <v-tab-item>
+        <v-card class="pa-3">
+          <router-view></router-view>
+        </v-card>
+      </v-tab-item>
     </v-tabs-items>
   </div>
 </template>
