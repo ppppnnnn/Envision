@@ -1,23 +1,37 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Questions from "../views/Questions";
 
 Vue.use(VueRouter);
 
-
+const group = () => import('@/views/Group');
+const groupGeneralInfo = () => import('@/components/GroupGeneralInfo');
+const groupMemberList = () => import('@/components/GroupMemberList');
 const newArticle =() => import('@/views/NewArticle');
 const newPost = () => import('@/views/NewPost');
 const newQuestion = () => import('@/views/NewQuestion');
-const questions = () => import('@/views/Questions');
 const question = () => import('@/views/Question');
-
-
-const editor = () => import('@/components/TextEditorFull');
+const questions = () => import('@/views/Questions');
 
 
 const routes = [
   {
-    path: '/',
-    component: editor
+    path: '/group',
+    component: group,
+    children: [
+      {
+        path: 'general',
+        component: groupGeneralInfo
+      },
+      {
+        path: 'members',
+        component: groupMemberList
+      },
+    ]
+  },
+  {
+    path: '/group/general',
+    component: questions
   },
   {
     path: '/articles/new',
