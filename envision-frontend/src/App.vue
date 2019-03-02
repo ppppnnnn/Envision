@@ -1,34 +1,34 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
+    <app-toolbar></app-toolbar>
+    <app-side-menu></app-side-menu>
 
-    <v-content>
-      <HelloWorld/>
+    <v-content style="padding-right: 300px;">
+      <v-container fluid>
+        <v-layout>
+          <v-flex shrink style="width: 100%;">
+            <router-view></router-view>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-content>
+
+    <app-right-side-panel></app-right-side-panel>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import AppToolbar from './components/AppToolbar'
+import AppSideMenu from './components/AppSideMenu'
+import AppRightSidePanel from './components/AppRightSidePanel'
 import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AppToolbar,
+    AppSideMenu,
+    AppRightSidePanel,
   },
   data () {
     return {
@@ -36,13 +36,19 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://127.0.0.1:8000/index/')
-    .then(function(response){
-      console.log(response)
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
+    // axios.get('http://127.0.0.1:8000/index/')
+    // .then(function(response) {
+    //   console.log(response)
+    // })
+    // .catch(function(error) {
+    //   console.log(error)
+    // })
   },
 }
 </script>
+
+<style>
+  * {
+    font-family: 等线, Serif,sans-serif;
+  }
+</style>

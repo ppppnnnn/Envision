@@ -16,7 +16,7 @@ Envision 是完全免费开源的，由志愿者们进行开发和维护。[查�
 
 ## 许可协议
 
-任何注册并使用 Envision 的用户，均视为已经同意**Envision用户协议**（撰写中）。任何在 Envision 中的言论如果违反国家相关法律法规、违反校规校纪，或者违反 Envision 许可协议，将被追究责任。
+任何注册并使用 Envision 的用户，均视为已经同意**[Envision用户协议](https://github.com/AAIT-SUSE/Envision/blob/master/documentations/EULA.md)**。任何在 Envision 中的言论如果违反国家相关法律法规、违反校规校纪，或者违反 Envision 许可协议，将被追究责任。
 
 Envision 基于`AGPL3.0`开源协议，意味着任何想要获取源代码，在源代码的基础上进行二次开发的开发者必须无条件遵守开源协议的条款。你可以在[这里](https://opensource.org/licenses/AGPL-3.0)看到完整的`AGPL3.0`开源协议内容。
 
