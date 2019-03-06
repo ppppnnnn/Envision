@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
-from .models import User,UserAccount,UserToken,Article,ArticleComment,ArticleCommentReply,GroupLearningTask
+from .models import User,UserAccount,UserToken,Article,ArticleComment,ArticleCommentReply,GroupLearningTask,Affair
 from .models import GroupAnnouncement,LearningTask,Section,Post,PostComment,PostCommentReply,GroupLearningTaskSubmit
 from .models import Administrators,DirectAnswerAnswer,Announcement,Group,GroupActivity,DirectAnswer,GroupLearningMaterials
 
@@ -115,7 +115,7 @@ class LearningTaskSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model   =  User
-        fields  =  ('uid','username','e_mail','real_name','user_logo','user_description','major','e_class','dept','identity')
+        fields  =  ('uid','username','e_mail','real_name','user_logo','user_description','major','e_class','dept','identity','concern')
 
 
 class UserAccountSerializer(serializers.ModelSerializer):
@@ -156,3 +156,11 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
     class Meta:
         model   =  User
         fields  =  ('e_mail','password','confirm_password')
+
+#--------------------------------------------------------------------------------------------------------------------------
+class AffairSerializer(serializers.ModelSerializer):
+    class Meta:
+        model   =  Affair
+        fields  =  ('affair_id','goods_name','goods_description','goods_owner','borrower','contact_borrower',
+        'borrow_time','return_time','register_time','is_return')
+

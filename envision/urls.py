@@ -43,6 +43,8 @@ router.register(r'LearningTaskViewSet',views.LearningTaskViewSet)
 router.register(r'GroupLearningTaskViewSet',views.GroupLearningTaskViewSet)
 router.register(r'GroupLearningTaskSubmitViewSet',views.GroupLearningTaskSubmitViewSet)
 router.register(r'GroupLearningMaterialsViewSet',views.GroupLearningMaterialsViewSet)
+#-------------------------------事务--------------------------------------
+router.register(r'affair',views.AffairViewSet)
 #-------------------------------用户----------------------------------
 router.register(r'UserViewSet',views.UserViewSet)
 router.register(r'UserAccountViewSet',views.UserAccountViewSet)

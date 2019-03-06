@@ -24,6 +24,7 @@ class User(models.Model):
     e_class            =   models.CharField(max_length=45,blank=True,null=True)     #行政班级
     dept               =   models.CharField(max_length=45,blank=True,null=True)     #协会部门
     identity           =   models.CharField(max_length=45,blank=True,null=True)     #身份
+    concern            =   models.CharField(max_length=90,blank=True,null=True)
     #加盐腌制密码并保存
     def save(self,*args,**kwargs):
         ch = 'fhuendhsgjlsmlmnvjjsljlsmn'
@@ -240,6 +241,22 @@ class LearningTask(models.Model):
     is_end             =   models.IntegerField(blank=True,null=True)
     class Meta:
         db_table = 'learning_task'
+
+
+class Affair(models.Model):
+    affair_id          =   models.AutoField(primary_key=True)
+    goods_name         =   models.CharField(max_length=90)
+    goods_description  =   models.TextField(blank=True,null=True)
+    goods_owner        =   models.CharField(max_length=45)
+    borrower           =   models.CharField(max_length=45)
+    contact_borrower   =   models.CharField(max_length=45)
+    borrow_time        =   models.DateTimeField(blank=True,null=True)
+    return_time        =   models.DateTimeField(blank=True,null=True)
+    register_time      =   models.DateTimeField()
+    is_return          =   models.IntegerField()
+    class Meta:
+        db_table = 'affair'
+
 
 
 
