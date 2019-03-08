@@ -13,7 +13,7 @@ from rest_framework                import       permissions,viewsets,renderers,g
 #-----------------------------------------------------------------------------------------
 import random
 #导入序列化器
-from .serializers import ArticleSerializer,ArticleCommentSerializer,ArticleCommentReplySerializer
+from .serializers import ArticleSerializer,ArticleCommentSerializer,ArticleCommentReplySerializer,AffairSerializer
 from .serializers import SectionSerializer,PostSerializer,PostCommentSerializer,PostCommentReplySerializer
 from .serializers import PostCommentReplySerializer,DirectAnswerSerializer,DirectAnswerAnswerSerializer,GroupSerializer
 from .serializers import GroupActivitySerializer,GroupAnnouncementSerializer,LearningTaskSerializer,UserRegisterSerializer
@@ -23,7 +23,7 @@ from .serializers import GroupLearningTaskSerializer,GroupLearningTaskSubmitSeri
 #导入模型
 from .models import Article,ArticleComment,ArticleCommentReply,Announcement,Section,Post,PostComment,PostCommentReply
 from .models import Group,GroupActivity,GroupAnnouncement,DirectAnswer,DirectAnswerAnswer,User,UserAccount,UserToken
-from .models import LearningTask,Administrators,GroupLearningTask,GroupLearningTaskSubmit,GroupLearningMaterials
+from .models import LearningTask,Administrators,GroupLearningTask,GroupLearningTaskSubmit,GroupLearningMaterials,Affair
 
 #导入过权限组
 from .permissions import IsAdminUser,IsOwnerOrReadOnly,IsGroupAdminUser
@@ -188,6 +188,15 @@ class LearningTaskViewSet(viewsets.ModelViewSet):
     filter_fields      =   ('author_id',)
     ordering_fields    =   ('start_time',)
     search_fields      =   ('^tag',)
+
+
+class AffairViewSet(viewsets.ModelViewSet):
+    queryset           =   Affair.objects.all()
+    serializer_class   =   AffairSerializer
+    filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,filters.SearchFilter,)
+    filter_fields      =   ('goods_name','goods_owner','borrower','is_return',)
+    ordering_fields    =   ('register_time',)
+    search_fields      =   ('^goods_name',)
 
 
 class UserViewSet(viewsets.ModelViewSet):
