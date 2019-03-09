@@ -56,6 +56,7 @@ class UserToken(models.Model):
 class Announcement(models.Model):
     announcement_id    =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField(blank=True,null=True)
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     create_time        =   models.DateTimeField(blank=True,null=True)
     topic              =   models.CharField(max_length=45)
     content            =   models.TextField(blank=True,null=True)
@@ -66,6 +67,7 @@ class Announcement(models.Model):
 class Article(models.Model):
     article_id         =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     create_time        =   models.DateTimeField(blank=True,null=True)
     tag                =   models.CharField(max_length=90,blank=True,null=True)
     topic              =   models.CharField(max_length=200)
@@ -77,6 +79,7 @@ class Article(models.Model):
 class ArticleComment(models.Model):
     comment_id         =   models.AutoField(primary_key=True)
     article_id         =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     author_id          =   models.IntegerField()
     create_time        =   models.DateTimeField()
     content            =   models.TextField()
@@ -87,6 +90,7 @@ class ArticleComment(models.Model):
 class ArticleCommentReply(models.Model):
     comment_reply_id   =   models.AutoField(primary_key=True)
     article_id         =   models.IntegerField(blank=True,null=True)
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     comment_id         =   models.IntegerField()
     author_id          =   models.IntegerField()
     create_time        =   models.DateTimeField()
@@ -107,6 +111,7 @@ class Section(models.Model):
 class Post(models.Model):
     post_id            =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField(blank=True,null=True)
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     section_id         =   models.IntegerField()
     create_time        =   models.DateTimeField()
     topic              =   models.CharField(max_length=200)
@@ -118,6 +123,7 @@ class Post(models.Model):
 class PostComment(models.Model):
     comment_id         =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     post_id            =   models.IntegerField()
     create_time        =   models.DateTimeField()
     content            =   models.TextField()
@@ -130,6 +136,7 @@ class PostCommentReply(models.Model):
     comment_id         =   models.IntegerField()
     post_id            =   models.IntegerField(blank=True,null=True)
     author_id          =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     create_time        =   models.DateTimeField()
     content            =   models.TextField()
     class Meta:
@@ -139,6 +146,7 @@ class PostCommentReply(models.Model):
 class DirectAnswer(models.Model):
     direct_answer_id   =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     create_time        =   models.DateTimeField()
     tag                =   models.CharField(max_length=90,blank=True,null=True)
     question           =   models.CharField(max_length=200)
@@ -152,6 +160,7 @@ class DirectAnswerAnswer(models.Model):
     answer_id          =   models.AutoField(primary_key=True)
     direct_answer_id   =   models.IntegerField()
     author_id          =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     create_time        =   models.DateTimeField()
     content            =   models.TextField()
     class Meta:
@@ -162,6 +171,7 @@ class Group(models.Model):
     group_id           =   models.AutoField(primary_key=True)
     group_name         =   models.CharField(max_length=45)
     group_admin_id     =   models.CharField(max_length=200)
+    group_admin_name   =   models.CharField(max_length=90,blank=True,null=True)
     description        =   models.TextField(blank=True,null=True)
     create_time        =   models.DateTimeField()
     group_member_id    =   models.CharField(max_length=200,blank=True,null=True)
@@ -197,6 +207,7 @@ class GroupLearningTask(models.Model):
     task_id            =   models.AutoField(primary_key=True)
     group_id           =   models.IntegerField()
     publisher_id       =   models.IntegerField(blank=True,null=True)
+    publisher_name        =   models.CharField(max_length=45,blank=True,null=True)
     topic              =   models.CharField(max_length=45)
     description        =   models.TextField(blank=True,null=True)
     start_time         =   models.DateTimeField()
@@ -211,6 +222,7 @@ class GroupLearningTaskSubmit(models.Model):
     task_id            =   models.IntegerField()
     group_id           =   models.IntegerField(blank=True,null=True)
     author_id          =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     create_time        =   models.DateTimeField()
     content            =   models.TextField()
     score              =   models.IntegerField(blank=True,null=True)
@@ -221,6 +233,7 @@ class GroupLearningTaskSubmit(models.Model):
 class GroupLearningMaterials(models.Model):
     materials_id       =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     group_id           =   models.IntegerField()
     create_time        =   models.DateTimeField()
     content            =   models.FileField()
@@ -232,6 +245,7 @@ class GroupLearningMaterials(models.Model):
 class LearningTask(models.Model):
     task_id            =   models.AutoField(primary_key=True)
     author_id          =   models.IntegerField()
+    author_name        =   models.CharField(max_length=45,blank=True,null=True)
     start_time         =   models.DateField()
     end_time           =   models.DateTimeField(blank=True,null=True)
     tag                =   models.CharField(max_length=45,blank=True,null=True)

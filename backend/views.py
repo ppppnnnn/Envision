@@ -39,7 +39,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class   =   ArticleSerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,filters.SearchFilter)
-    filter_fields      =   ('author_id',)
+    filter_fields      =   ('author_id','author_name',)
     ordering_fields    =   ('create_time',)
     search_fields      =   ('^tag',)
 
@@ -50,7 +50,7 @@ class ArticleCommentViewSet(viewsets.ModelViewSet):
     serializer_class   =   ArticleCommentSerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,)
-    filter_fields      =   ('article_id','author_id',)
+    filter_fields      =   ('article_id','author_id','author_name',)
     ordering_fields    =   ('create_time',)
 
 
@@ -59,7 +59,7 @@ class ArticleCommentReplyViewSet(viewsets.ModelViewSet):
     serializer_class   =   ArticleCommentReplySerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,)
-    filter_fields      =   ('article_id','comment_id','author_id',)
+    filter_fields      =   ('article_id','comment_id','author_id','author_name',)
     ordering_fields    =   ('create_time',)
 
 
@@ -82,7 +82,7 @@ class PostVieweSet(viewsets.ModelViewSet):
     serializer_class   =   PostSerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,)   
-    filter_fields      =   ('author_id','section_id',)
+    filter_fields      =   ('author_id','author_name','section_id',)
     ordering_fields    =   ('create_time',)
 
 
@@ -91,7 +91,7 @@ class PostCommentViewSet(viewsets.ModelViewSet):
     serializer_class   =   PostCommentSerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,)  
-    filter_fields      =   ('author_id','post_id',)
+    filter_fields      =   ('author_id','author_name','post_id',)
     ordering_fields    =   ('create_time',)
 
 
@@ -100,7 +100,7 @@ class PostCommentReplyViewSet(viewsets.ModelViewSet):
     serializer_class   =   PostCommentReplySerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,)   
-    filter_fields      =   ('comment_id','post_id','author_id',)
+    filter_fields      =   ('comment_id','post_id','author_id','author_name',)
     ordering_fields    =   ('create_time',)
 
 
@@ -109,7 +109,7 @@ class DirectAnswerViewSet(viewsets.ModelViewSet):
     serializer_class   =   DirectAnswerSerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,filters.SearchFilter,)   
-    filter_fields      =   ('author_id',)
+    filter_fields      =   ('author_id','author_name',)
     ordering_fields    =   ('create_time',)
     search_fields      =   ('^tag',)
 
@@ -119,7 +119,7 @@ class DirectAnswerAnswerViewSet(viewsets.ModelViewSet):
     serializer_class   =   DirectAnswerAnswerSerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,)   
-    filter_fields      =   ('direct_answer_id','author_id')
+    filter_fields      =   ('direct_answer_id','author_id','author_name',)
     ordering_fields    =   ('create_time',)
 
 
@@ -176,7 +176,7 @@ class GroupLearningMaterialsViewSet(viewsets.ModelViewSet):
     serializer_class   =   GroupLearningMaterialsSerializer
  #  permission_classes =   (IsOwnerOrReadOnly)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,)
-    filter_fields      =   ('author_id','group_id',)
+    filter_fields      =   ('author_id','author_name','group_id',)
     ordering_fields    =   ('create_time',)
 
 
@@ -185,7 +185,7 @@ class LearningTaskViewSet(viewsets.ModelViewSet):
     serializer_class   =   LearningTaskSerializer
 #   permission_classes =   (IsOwnerOrReadOnly,IsAdminUser,)
     filter_backends    =   (DjangoFilterBackend,filters.OrderingFilter,filters.SearchFilter,)   
-    filter_fields      =   ('author_id',)
+    filter_fields      =   ('author_id','author_name',)
     ordering_fields    =   ('start_time',)
     search_fields      =   ('^tag',)
 
