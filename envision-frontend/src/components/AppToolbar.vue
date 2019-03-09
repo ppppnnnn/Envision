@@ -28,7 +28,7 @@
       <span>通知</span>
     </v-tooltip>
 
-    <v-btn outline large @click="ShowLoginDialog">
+    <v-btn outline large @click="ShowLoginDialog" v-if="isUserLogged == false">
       <v-icon>account_circle</v-icon> 
       <span class="font-weight-bold"> &nbsp;登录/注册</span>
     </v-btn>

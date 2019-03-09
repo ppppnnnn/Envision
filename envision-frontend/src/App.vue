@@ -91,7 +91,7 @@ export default {
   },
   data () {
     return {
-      isUserLogged: true,
+      isUserLogged: false,
       loginDialog: false,
       showPassword: false,
       passwordInputType: "password",
@@ -108,14 +108,14 @@ export default {
   },
   mounted() {
     // Check local storage for user login status
-    this.isUserLogged = this.CheckLoginStatus();
-    // axios.get('http://127.0.0.1:8000/index/')
-    // .then(function(response) {
-    //   console.log(response)
-    // })
-    // .catch(function(error) {
-    //   console.log(error)
-    // })
+    let status = this.CheckLoginStatus();
+
+    if(status === true) {
+      //TODO: set global data
+      this.isUserLogged = true;
+    } else {
+      this.isUserLogged = false;
+    }
   },
   methods: {
     ShowLoginDialog: function() {
