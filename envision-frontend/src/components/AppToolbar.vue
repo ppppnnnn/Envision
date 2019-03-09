@@ -28,12 +28,10 @@
       <span>通知</span>
     </v-tooltip>
 
-    <v-tooltip bottom v-if="isUserLogged == false">
-      <v-btn icon slot="activator" @click="ShowLoginDialog">
-        <v-icon>account_circle</v-icon>
-      </v-btn>
-      <span>登录/注册</span>
-    </v-tooltip>
+    <v-btn outline large @click="ShowLoginDialog">
+      <v-icon>account_circle</v-icon> 
+      <span class="font-weight-bold"> &nbsp;登录/注册</span>
+    </v-btn>
 
     <v-menu v-if="isUserLogged == true">
       <v-btn slot="activator" fab flat small>

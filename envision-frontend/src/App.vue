@@ -18,8 +18,15 @@
             label="用户名"
             box
             color="amber"
-            dense
+            :value="inputUsername"
             :hint="hintUsername"
+          ></v-text-field>
+          <v-text-field
+            v-if="loginWindowTitle=='注册 Envision'"
+            label="邮箱"
+            box
+            color="amber"
+            :value="inputEmail"
           ></v-text-field>
           <v-text-field
             label="密码"
@@ -27,7 +34,7 @@
             :append-icon="showPassword ? 'visibility' : 'visibility_off'"
             @click:append="TogglePasswordVisibility"
             box
-            dense
+            :value="inputPassword"
             color="amber"
             :hint="hintPassword"
           ></v-text-field>
@@ -73,6 +80,7 @@ import AppToolbar from './components/AppToolbar'
 import AppSideMenu from './components/AppSideMenu'
 import AppRightSidePanel from './components/AppRightSidePanel'
 import axios from 'axios'
+import router from './plugins/router'
 
 export default {
   name: 'App',
@@ -93,6 +101,9 @@ export default {
       loginWindowText: "在不登录Envision的情况下，您只能访问有限的内容。登录 Envision 来让我们更好的为你服务。",
       hintUsername: "",
       hintPassword: "",
+      inputUsername: "",
+      inputPassword: "",
+      inputEmail: "",
     }
   },
   mounted() {
@@ -142,6 +153,42 @@ export default {
       } else {
         return false;
       }
+    },
+    Login: function() {
+      let self = this;
+      axios.post('http://127.0.0.1:8000/login/', {
+        "email_or_username": self.inputUsername,
+        "password": self.inputPassword
+      })
+      .then(function (response) {
+        console.log(response);
+        if(response.data.msg == "Succeeded") {
+          // successfully logged in
+          // refresh page
+          router.go('/');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    Register: function() {
+      let self = this;
+      axios.post('http://127.0.0.1:8000/register/', {
+        "username": self.inputUsername,
+        "e_mail": self.inputEmail,
+        "password": self.inputPassword
+      })
+      .then(function (response) {
+        console.log(response);
+        if(response.data.msg == "Succeeded") {
+          // successfully registered
+
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
 }
