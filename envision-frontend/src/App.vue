@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <app-toolbar :isUserLogged=isUserLogged :ShowLoginDialog=ShowLoginDialog></app-toolbar>
-    <app-side-menu v-if="isUserlogged"></app-side-menu>
+    <app-side-menu :isUserLogged=isUserLogged></app-side-menu>
 
     <v-dialog
       v-model="loginDialog"
@@ -83,7 +83,7 @@ export default {
   },
   data () {
     return {
-      isUserLogged: false,
+      isUserLogged: true,
       loginDialog: false,
       showPassword: false,
       passwordInputType: "password",
@@ -96,6 +96,8 @@ export default {
     }
   },
   mounted() {
+    // Check local storage for user login status
+    this.isUserLogged = this.CheckLoginStatus();
     // axios.get('http://127.0.0.1:8000/index/')
     // .then(function(response) {
     //   console.log(response)
@@ -131,6 +133,14 @@ export default {
         this.loginWindowText = "在不登录Envision的情况下，您只能访问有限的内容。登录 Envision 来让我们更好的为你服务。";
         this.hintUsername = "";
         this.hintPassword = "";
+      }
+    },
+    CheckLoginStatus: function() {
+      if(window.localStorage.getItem("envision_user") != null) {
+        //user has logged
+        return true;
+      } else {
+        return false;
       }
     }
   }

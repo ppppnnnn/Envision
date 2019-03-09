@@ -8,6 +8,7 @@
     v-model="drawer"
     style="z-index: 1"
     :mini-variant="mini"
+    v-if="isUserLogged"
   >
     <v-toolbar flat class="transparent">
       <v-list class="pa-0" dense>
@@ -50,6 +51,9 @@
 
 <script>
 export default {
+  props: {
+    isUserLogged: Boolean
+  },
   data: () => ({
     drawer: null,
     mini: false,

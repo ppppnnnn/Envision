@@ -31,6 +31,10 @@ const home = () => import('@/views/Home');
 
 const routes = [
   {
+    path: '/',
+    component: home
+  },
+  {
     path: '/group',
     component: group,
     children: [

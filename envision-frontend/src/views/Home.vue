@@ -1,28 +1,35 @@
 <template>
   <div>
-    <v-carousel   
-    xl7 lg12 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-    <v-carousel-item
-      v-for="(item,i) in items"
-      :key="i"
-      :src="item.src"
-    ></v-carousel-item>
+    <v-carousel>
+      <v-carousel-item
+        v-for="(item,i) in items"
+        :key="i"
+        :src="item.src"
+      ></v-carousel-item>
     </v-carousel>
 
-     <v-card   raised v-for="post in posts" :key="post.id" class="mb-4"
-     xl7 lg12 md7 sm12 xs12 order-sm2 order-xs2 order-lg1 order-md1 order-xl1>
-
-      <v-img v-if="post.img"
-        :src="post.img"
-        aspect-ratio="2.75"
-      ></v-img>
-      <v-card-title primary-title v-if="post.title">
-        <h3 class="headline mb-0">{{ post.title }}</h3>
+    <v-card>
+      <v-card-title primary-title>
+        <h3 class="headline mb-0">“发现杯”全国大学生互联网软件设计大赛</h3>
       </v-card-title>
-      <v-card-text v-if="post.content">
-        {{ post.content }}
-      </v-card-text>
     </v-card>
+
+    <v-layout row wrap>
+      <v-flex xs6 v-for="post in posts" :key="post.id" >
+        <v-card raised class="ma-4">
+          <v-img v-if="post.img"
+            :src="post.img"
+            aspect-ratio="2.75"
+          ></v-img>
+          <v-card-title primary-title v-if="post.title">
+            <h3 class="headline mb-0">{{ post.title }}</h3>
+          </v-card-title>
+          <v-card-text v-if="post.content">
+            {{ post.content }}
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -46,10 +53,6 @@
           }
         ],
         posts:[
-          {
-          id: 0,
-          title: '2018年全国大学生“互联网+”创新大赛  暨第六届“发现杯”全国大学生互联网软件设计大奖赛',
-          },
           {
           id: 1,
           title:'赛项主题',

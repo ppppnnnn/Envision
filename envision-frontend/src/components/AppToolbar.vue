@@ -3,8 +3,8 @@
     <span class="title ml-3 mr-5">Envision&nbsp;<span class="slim-text">Web</span></span>
     <v-spacer></v-spacer>
 
-    <v-menu>
-      <v-btn icon slot="activator" v-if="isUserLogged == true">
+    <v-menu v-if="isUserLogged == true">
+      <v-btn icon slot="activator">
         <v-icon>create</v-icon>
       </v-btn>
       <v-list dense>
