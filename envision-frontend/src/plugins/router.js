@@ -22,12 +22,17 @@ const newArticle =() => import('@/views/NewArticle');
 const newPost = () => import('@/views/NewPost');
 const newQuestion = () => import('@/views/NewQuestion');
 const person = () => import('@/views/Person');
+const personArticleList = () => import('@/components/PersonArticleList');
+const personAttention = () => import('@/components/PersonAttention');
+const personPostList = () => import('@/components/PersonPostList');
+const personQuestions = () => import('@/components/PersonQuestions');
+const personStudy = () => import('@/components/PersonStudy');
 const postlist = () => import('@/views/PostList');
 const postdetail = () => import('@/views/PostDetail');
 const question = () => import('@/views/QuestionDetail');
 const questions = () => import('@/views/Questions');
 const shoppingdetail = () => import('@/views/ShoppingDetail');
-const home = () => import('@/views/Home');
+//const home = () => import('@/views/Home');
 
 const routes = [
   {
@@ -99,14 +104,36 @@ const routes = [
   },
   {
     path: '/person',
-    component: person
+    component: person,
+    children: [
+      {
+        path: 'articlelist',
+        component: personArticleList
+      },
+      {
+        path: 'attention',
+        component: personAttention
+      },
+      {
+        path: 'postlist',
+        component: personPostList
+      },
+      {
+        path: 'questions',
+        component: personQuestions
+      },
+      {
+        path: 'study',
+        component: personStudy
+      }
+    ]
   },
   {
-    path: '/announmentcelists/new',
+    path: '/announmentcelists',
     component: announcementlist
   },
   {
-    path: '/activitynews/new',
+    path: '/activitynews',
     component: activitynews
   },
   {
@@ -114,15 +141,15 @@ const routes = [
     component: postlist
   },
   {
-    path: '/postdetail',
+    path: '/postdetail/:id',
     component: postdetail
   },
   {
-    path: '/announcementdetail',
+    path: '/announcementdetail/:id',
     component: announcementdetail
   },
   {
-    path: '/activitynewsdetail',
+    path: '/activitynewsdetail/:id',
     component: activitynewsdetail
   },
   {

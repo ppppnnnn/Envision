@@ -1,7 +1,7 @@
 <template>
   <div>
     <span>
-      <v-btn icon :to="'/forum/new'">
+      <v-btn icon :to="'/forum'">
         <v-icon>keyboard_arrow_left</v-icon>
       </v-btn>
       返回论坛首页
@@ -12,12 +12,12 @@
       </v-subheader>
       <v-list two-line>
         <div v-for="(item, index) in items" :key="index">
-          <v-list-tile avatar ripple :to="item.link">
+          <v-list-tile avatar ripple :to="/announcementdetail/ +item.annoucement_id">
             <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>    
+              <v-list-tile-title>{{ item.topic }}</v-list-tile-title>    
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-list-tile-action-text>{{ item.action }}</v-list-tile-action-text>
+              <v-list-tile-action-text>{{ item.create_time }}</v-list-tile-action-text>
             </v-list-tile-action>
           </v-list-tile>
           <v-divider v-if="index + 1 < items.length" :key="`divider-${index}`">
@@ -29,21 +29,31 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   data() {
     return {
       header: '公告',
-      items:[
-        {title: '公告一', action: '2019/1/7', link: '/announcementdetail'},
-        {title: '公告二', action: '2019/1/6', link: '/announcementdetail'},
-        {title: '公告三', action: '2019/1/5', link: '/announcementdetail'},
-        {title: '公告四', action: '2019/1/4', link: '/announcementdetail'},
-        {title: '公告五', action: '2019/1/3', link: '/announcementdetail'},
-        {title: '公告六', action: '2019/1/2', link: '/announcementdetail'},
-        {title: '公告七', action: '2019/1/1', link: '/announcementdetail'},
-      ]
+      items:[]
     }
+  },
+  methods:{
+      AnnoucementListGet: function() {
+      let self = this;
+      axios.get('http://127.0.0.1:8000/api/AnnouncementViewSet/?ordering=-create_time'
+      ).
+      then(function(response) {
+        console.log(response)
+        self.items=response.data;
+      }).
+      catch(function(error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted() {
+    this.AnnoucementListGet();
   }
 }
 </script>
