@@ -207,7 +207,7 @@ class GroupLearningTask(models.Model):
     task_id            =   models.AutoField(primary_key=True)
     group_id           =   models.IntegerField()
     publisher_id       =   models.IntegerField(blank=True,null=True)
-    publisher_name        =   models.CharField(max_length=45,blank=True,null=True)
+    publisher_name     =   models.CharField(max_length=45,blank=True,null=True)
     topic              =   models.CharField(max_length=45)
     description        =   models.TextField(blank=True,null=True)
     start_time         =   models.DateTimeField()

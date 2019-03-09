@@ -232,7 +232,8 @@ class UserRegisterAPIView(APIView):
         serializer    =   UserRegisterSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            context   =   {'msg':'Succeeded'}
+            uid = User.objects.get(username=data.get('username')).uid
+            context   =   {'msg':'Succeeded','id':uid}
             return JsonResponse(context)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
@@ -265,8 +266,9 @@ class UserLoginAPIView(APIView):
                 for i in range(10):
                     ch += (list(random_list)[random.randint(0,16)])
                 token = hashlib.md5(user.e_mail.encode('utf-8') + ch.encode('utf-8')).hexdigest()
+                uid   = user.uid
                 UserToken.objects.update_or_create(owner=user,defaults={'token':token})
-                context = {'msg':'Succeeded','Token':token}
+                context = {'msg':'Succeeded','Token':token,'id':uid}
                 return JsonResponse(context)
         except:
             return Response({'msg':'ERROR Incorrect username or password'},status=status.HTTP_400_BAD_REQUEST)
