@@ -1,10 +1,10 @@
 <template>
   <div>
     <span>
-      <v-btn icon>
+      <v-btn icon :to="'/explore/questionslist'">
         <v-icon>keyboard_arrow_left</v-icon>
       </v-btn>
-      返回问题列表
+      返回直答列表
     </span>
 
     <v-card class="mb-3">
@@ -16,10 +16,9 @@
       <v-card-text v-html="questionDetail"></v-card-text>
 
       <v-card-actions>
-        <v-btn small flat color="info">我来回答</v-btn>
+        <v-btn small flat color="info" @click="dialog = !dialog">我来回答</v-btn>
       </v-card-actions>
     </v-card>
-
     <v-card v-for="answer in answers" :key="answer.id" class="mb-1">
       <v-card-title>
         <v-avatar color="grey lighten-4" :size=40 slot="activator">
@@ -28,11 +27,9 @@
         <span class="ml-3 font-weight-bold">{{ answer.responder }}, </span>
         <span class="ml-3">回答于 {{ answer.time }}</span>
       </v-card-title>
-
       <v-card-text>
         <span v-html="answer.content"></span>
       </v-card-text>
-
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-tooltip top>
@@ -41,27 +38,44 @@
           </v-btn>
           <span>赞成该答案</span>
         </v-tooltip>
-
         <span class="font-weight-bold mx-2">{{ answer.vote }}</span>
-
         <v-tooltip top>
           <v-btn flat color="error" icon slot="activator">
             <v-icon>arrow_drop_down</v-icon>
           </v-btn>
           <span>反对该答案</span>
         </v-tooltip>
-
-          <v-btn outline color="grey" slot="activator" class="mx-2">
-            <v-icon>flag</v-icon> 举报
-          </v-btn>
+        <v-btn outline color="grey" slot="activator" class="mx-2">
+          <v-icon>flag</v-icon> 举报
+        </v-btn>
       </v-card-actions>
     </v-card>
+    <v-dialog v-model="dialog" max-width="780">
+      <v-card>
+        <envision-editor></envision-editor>
+        <v-layout row wrap>
+          <v-flex class="px-4">
+            <v-btn block @click="dialog = false">确认</v-btn>
+          </v-flex>
+          <v-flex class="px-4">
+            <v-btn color="info" block @click="dialog = false">取消</v-btn>
+          </v-flex>
+        </v-layout>
+      </v-card>  
+    </v-dialog>
   </div>
 </template>
 
 <script>
+  import envisionEditor from '@/components/TextEditorFull'
+
   export default {
+
+    components: {
+      envisionEditor
+    },
     data: () => ({
+      dialog: false,
       questionTitle: '什么是直答？',
       poster: 'James White',
       time: '2019/2/17',

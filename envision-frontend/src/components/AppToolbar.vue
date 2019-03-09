@@ -52,6 +52,7 @@
           v-for="(item, index) in menuItems"
           :key="index"
           avatar
+          @click=";"
           :to="item.link"
         >
           <v-list-tile-avatar>
