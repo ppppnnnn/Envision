@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import storage from './plugins/storage';
 
 export default {
   data() {
@@ -68,6 +70,24 @@ export default {
         },
       ]
     }
-  }
+  },
+  // methods: {
+  //   PersonPostListGet: function() {
+  //     let self = this;
+  //     let pid = storage.state.uid;
+  //     axios.get('http://127.0.0.1:8000/api/PostViewSet/?author_id=pid'
+  //     ).
+  //     then(function(response) {
+  //       console.log(response.data)
+  //       self.items=response.data;
+  //     }).
+  //     catch(function(error) {
+  //       console.log(error);
+  //     });
+  //   }
+  // },
+  // mounted() {
+  //   this.PersonPostListGet();
+  // }
 }
 </script>

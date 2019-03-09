@@ -9,13 +9,13 @@
     <v-card class="mb-3">
       <v-card-title primary-title>   
         <v-list-tile-content style="font-size:20px">
-          <v-list-tile-title>{{ title }}</v-list-tile-title>
+          <v-list-tile-title>{{ topic }}</v-list-tile-title>
           <v-list-tile-sub-title class="grey--text" style="font-size:10px">
-            {{ time }}
+            {{ start_time }}
           </v-list-tile-sub-title>
         </v-list-tile-content>
       </v-card-title>
-      <v-card-text v-html="announcementDetail"></v-card-text>    
+      <v-card-text v-html="content"></v-card-text>    
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn disabled flat color="grey" class="mx-2">
@@ -28,13 +28,34 @@
 </template>
 
 <script>
+import axios from 'axios'
 
   export default {
     data: () => ({
-      title: '活动与新闻一',
-      time: '2019/2/17',
+      topic: '',
+      start_time: '',
       vote: 46,
-      announcementDetail: '<p>活动与新闻一的内容</p>',
-    })
+      content: '',
+    }),
+    methods:{
+      AnnoucementDetailGet: function() {
+      let aid = this.$route.params.id;
+      let self = this;
+      axios.get('http://127.0.0.1:8000/api/GroupActivityViewSet/${aid}/'
+      ).
+      then(function(response) {
+        console.log(response)
+        self.content = response.data.content;
+        self.topic = response.data.topic;
+        self.create_time = response.data.create_time;
+      }).
+      catch(function(error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted() {
+    this.AnnoucementDetailGet();
   }
+}
 </script>

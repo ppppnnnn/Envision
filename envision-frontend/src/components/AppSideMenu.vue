@@ -59,7 +59,7 @@ export default {
       { icon: 'school', text: '学习' },
       { icon: 'forum', text: '论坛', link: '/forum' },
       { icon: 'public', text: '探索', link: '/explore/dynamic' },
-      { icon: 'person', text: '个人中心', link: '/person' },
+      { icon: 'person', text: '个人中心', link: '/person/articlelist' },
       { icon: 'group', text: '群组' },
       { icon: 'shopping_cart', text: '礼品店', link: '/giftshop' },
       { icon: 'assignment', text: '社团事务' },
