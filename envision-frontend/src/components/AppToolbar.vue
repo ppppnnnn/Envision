@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar :color="userColorTheme" app clipped-left fixed>
+  <v-toolbar color="amber" app clipped-left fixed>
     <span class="title ml-3 mr-5">Envision&nbsp;<span class="slim-text">Web</span></span>
     <v-spacer></v-spacer>
 
@@ -76,11 +76,11 @@ export default {
   props: {
     isUserLogged: Boolean,
     ShowLoginDialog: Function,
+    username: String,
+    userDescription: String,
+    avatarHash: String
   },
   data: () => ({
-    avatarHash: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
-    userColorTheme: 'amber',
-    username: 'Owen Tsai',
     userDescription: '2015级自动化3班',
     menuItems: [
       { title: '个人中心', icon: 'person', link: '/user/new' },

@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_envision',
         'USER': 'root',
-        'PASSWORD': '*',
+        'PASSWORD': 'therapist1218',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

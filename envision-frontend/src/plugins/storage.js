@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-const storage = Vuex.Store({
+const storage = new Vuex.Store({
   state: {
 		uid: "",
 		username: ""

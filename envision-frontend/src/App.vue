@@ -1,6 +1,10 @@
 <template>
   <v-app>
-    <app-toolbar :isUserLogged=isUserLogged :ShowLoginDialog=ShowLoginDialog></app-toolbar>
+    <app-toolbar
+      :isUserLogged=isUserLogged 
+      :ShowLoginDialog=ShowLoginDialog
+      :avatarHash='"https://api.adorable.io/avatars/165/" + userAvatar'
+    ></app-toolbar>
     <app-side-menu :isUserLogged=isUserLogged></app-side-menu>
 
     <v-dialog v-model="loginDialog" max-width="450" dark>
@@ -10,30 +14,53 @@
         <v-card-text>{{ loginWindowText }} </v-card-text>
 
         <v-card-text>
-          <v-text-field
-            label="用户名"
-            box
-            color="amber"
-            :value="inputUsername"
-            :hint="hintUsername"
-          ></v-text-field>
-          <v-text-field
-            v-if="loginWindowTitle=='注册 Envision'"
-            label="邮箱"
-            box
-            color="amber"
-            :value="inputEmail"
-          ></v-text-field>
-          <v-text-field
-            label="密码"
-            :type="passwordInputType"
-            :append-icon="showPassword ? 'visibility' : 'visibility_off'"
-            @click:append="TogglePasswordVisibility"
-            box
-            :value="inputPassword"
-            color="amber"
-            :hint="hintPassword"
-          ></v-text-field>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <v-text-field
+                label="用户名"
+                color="amber"
+                :value="inputUsername"
+                :hint="hintUsername"
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs12>
+              <v-text-field
+                v-if="loginWindowTitle=='注册 Envision'"
+                label="邮箱"
+                color="amber"
+                :value="inputEmail"
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs12>
+              <v-text-field
+                label="密码"
+                :type="passwordInputType"
+                :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+                @click:append="TogglePasswordVisibility"
+                :value="inputPassword"
+                color="amber"
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs6 v-if="loginWindowTitle=='注册 Envision'">
+              经过 Envision 人工智能迅雷不及掩耳到铃儿响叮当之势的计算，这个头像最适合你了！<br>不满意？点击下面的按钮可以更换一个头像~
+            </v-flex>
+            <v-flex
+              v-if="loginWindowTitle=='注册 Envision'"
+              xs6
+              align-center
+              justify-center
+              layout
+              text-xs-center
+            >
+              <v-avatar
+                size=100
+                color="grey lighten-4"
+              >
+                <img :src="'https://api.adorable.io/avatars/165/' + randomHash" alt="avatar">
+              </v-avatar>
+            </v-flex>
+          </v-layout>
+          
         </v-card-text>
 
         <v-card-actions>  
@@ -45,11 +72,16 @@
             {{ loginWindowBtnLeft }}
           </v-btn>
 
+          <v-spacer v-if="loginWindowTitle=='注册 Envision'"></v-spacer>
+          <v-btn flat color="amber" v-if="loginWindowTitle=='注册 Envision'" @click="GenerateHash">
+            更换头像
+          </v-btn>
           <v-spacer></v-spacer>
 
           <v-btn
             color="yellow darken-1"
             flat="flat"
+            @click="LoginHandler"
           >
             {{ loginWindowBtnRight }}
           </v-btn>
@@ -108,6 +140,8 @@ export default {
     return {
       isUserLogged: false,
       loginDialog: false,
+      dialogLoginFailure: false,
+      dialogRegFailure: false,
       showPassword: false,
       passwordInputType: "password",
       loginWindowTitle: "登录 Envision",
@@ -115,10 +149,11 @@ export default {
       loginWindowBtnRight: "登录",
       loginWindowText: "在不登录Envision的情况下，您只能访问有限的内容。登录 Envision 来让我们更好的为你服务。",
       hintUsername: "",
-      hintPassword: "",
       inputUsername: "",
       inputPassword: "",
       inputEmail: "",
+      userAvatar: "", 
+      randomHash: "",
     }
   },
   mounted() {
@@ -126,17 +161,24 @@ export default {
     let status = this.CheckLoginStatus();
 
     if(status === true) {
-      storage.commit('setUserId', window.localStorage.getItem(envision_uid));
-      storage.commit('setUsername', window.localStorage.getItem(envision_user));
+      storage.commit('setUserId', window.localStorage.getItem("envision_uid"));
+      storage.commit('setUsername', window.localStorage.getItem("envision_user"));
       this.isUserLogged = true;
     } else {
+      this.GenerateHash();
       this.isUserLogged = false;
     }
+  },
+  computed: {
+    GenerateHash: function() {
+      this.randomHash = Math.random().toString(30).substr(2);
+    },
   },
   methods: {
     ShowLoginDialog: function() {
       this.loginDialog = true;
     },
+
     TogglePasswordVisibility: function() {
       if(this.passwordInputType === "password") {
         this.passwordInputType = "text";
@@ -152,14 +194,12 @@ export default {
         this.loginWindowBtnRight = "注册";
         this.loginWindowText = "欢迎您注册 Envision 。注册一旦完成，Envision 会记住你的登录状态。";
         this.hintUsername = "用户名可以是汉字、字母和数字";
-        this.hintPassword = "密码的长度至少是8位";
       } else {
         this.loginWindowTitle = "登录 Envision";
         this.loginWindowBtnLeft = "没有账号？注册一个";
         this.loginWindowBtnRight = "登录";
         this.loginWindowText = "在不登录Envision的情况下，您只能访问有限的内容。登录 Envision 来让我们更好的为你服务。";
         this.hintUsername = "";
-        this.hintPassword = "";
       }
     },
     CheckLoginStatus: function() {
@@ -167,6 +207,13 @@ export default {
         return true;
       } else {
         return false;
+      }
+    },
+    LoginHandler: function() {
+      if(this.loginWindowTitle === "登录 Envision") {
+        this.Login();
+      } else {
+        this.Register();
       }
     },
     Login: function() {
@@ -179,13 +226,13 @@ export default {
         console.log(response);
         if(response.data.msg == "Succeeded") {
           // successfully logged in, write ID and username into localstorage
-          window.localStorage.setItem("envision_uid", "");
+          window.localStorage.setItem("envision_uid", response.data.id);
           window.localStorage.setItem("envision_user", self.inputUsername);
           // refresh page
           router.go('/');
         } else {
           // name or password wrong
-          dialogLoginFailure = true;
+          this.dialogLoginFailure = true;
         }
       })
       .catch(function (error) {
@@ -204,12 +251,12 @@ export default {
         if(response.data.msg == "Succeeded") {
           // successfully registered
           //TODO: get ID and username, write into localstorage
-          window.localStorage.setItem("envision_uid", "");
+          window.localStorage.setItem("envision_uid", response.data.id);
           window.localStorage.setItem("envision_user", self.inputUsername);
           router.go('/');
         } else {
           // name or email has already been registered
-          dialogRegFailure = true;
+          this.dialogRegFailure = true;
         }
       })
       .catch(function (error) {

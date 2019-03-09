@@ -26,7 +26,7 @@
 
 <script>
 import axios from 'axios'
-import storage from './plugins/storage';
+import storage from '@/plugins/storage';
 
 
 export default {
