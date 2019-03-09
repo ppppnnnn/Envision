@@ -5,9 +5,6 @@
         <v-card-title primary-title class="article-title">
           <div>
             <h3 class="headline mb-0">{{ article.title }}</h3>
-            <div>作者 | 
-              {{ article.user_name }}
-            </div>
             <div>
             {{article.article_time}}
             </div>
@@ -16,12 +13,11 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-tooltip bottom>
-            <v-btn icon flat slot="activator" color="grey">
+            <v-btn disabled icon flat slot="activator" color="grey">
               <v-icon>favorite</v-icon>{{ article.applaud }}
             </v-btn>
-            <span>“赞同”功能暂未上线，正在完善之中</span>
           </v-tooltip>
-          <v-btn color="info" flat :to="/article/ + article.article_id">阅读</v-btn>
+          <v-btn color="info" flat :to="/article/ + user_id">阅读</v-btn>
         </v-card-actions>
       </v-card>
     </div>
@@ -37,23 +33,20 @@ export default {
           {
               article_id: 0 ,
               title: '0',
-              user_name: 'Xiaoming',
               article_time: '2019/1/1',
               applaud: 15
           },
           {
               article_id: 1 ,
               title: '1',
-              user_name: 'Xiaoming',
               article_time: '2019/1/1',
-              applaud: 15
+              applaud: 85
           },
           {
               article_id: 2 ,
               title: '2',
-              user_name: 'Xiaoming',
               article_time: '2019/1/1',
-              applaud: 15
+              applaud: 74
           },
       ]
     }
