@@ -74,11 +74,11 @@
       <div>  
         <v-tabs
           slot="extension" v-model="tab" color="warning" grow>
-          <v-tab>我的文章</v-tab>
-          <v-tab>我的帖子</v-tab>
-          <v-tab>我的直答</v-tab>
-          <v-tab>我的关注</v-tab>
-          <v-tab>我的学习</v-tab>
+          <v-tab to="/person/articlelist">我的文章</v-tab>
+          <v-tab to="/person/postlist">我的帖子</v-tab>
+          <v-tab to="/person/questions">我的直答</v-tab>
+          <v-tab to="/person/attention">我的关注</v-tab>
+          <v-tab to="/person/study">我的学习</v-tab>
         </v-tabs>
         <v-tabs-items>
           <v-tab-item>
@@ -112,33 +112,6 @@ export default {
           assignment: "掌握c语言指针" 
         }
       ],
-      groups: [
-        {
-          message: '我的文章',
-          value: 'Article',
-          link: '/postlist/' +user_id
-        },
-        {
-          message: '我的帖子',
-          value: 'Post',
-          link: '/postlist/ +user_id'
-        },
-        {
-          message: '我的直答',
-          value: 'Answer',
-          link: '/postlist/ +user_id'
-        },
-        {
-          message:'我的关注',
-          value:'MyAttention',
-          link: '/postlist/ +user_id'
-        },
-        {
-          message:'我的学习',
-          value:'MyStudy',
-          link: '/postlist/ +user_id'
-        },
-      ]
     }
   },
   methods: {

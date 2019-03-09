@@ -14,11 +14,11 @@
         <v-list-tile-content style="font-size:20px">
           <v-list-tile-title>{{ poster }}</v-list-tile-title>
           <v-list-tile-sub-title class="grey--text" style="font-size:10px">
-            {{ partition }} &nbsp;|&nbsp; {{ time }}
+            {{ theme }} &nbsp;|&nbsp; {{ create_time }}
           </v-list-tile-sub-title>
         </v-list-tile-content>
       </v-card-title>
-      <v-card-text v-html="postDetail"></v-card-text>
+      <v-card-text v-html="content"></v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn small flat color="info" @click="dialog = !dialog">评论</v-btn>
@@ -32,7 +32,7 @@
         <v-list-tile-content style="font-size:20px">
           <v-list-tile-title>{{ answer.responder }}</v-list-tile-title>
           <v-list-tile-sub-title class="grey--text" style="font-size:10px">
-            {{ answer.floornum }} &nbsp;|&nbsp; {{ answer.time }}
+            {{ answer.floornum }} &nbsp;|&nbsp; {{ answer.create_time }}
           </v-list-tile-sub-title>
         </v-list-tile-content>
       </v-card-title>
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import envisionEditor from '@/components/TextEditorFull'
 
   export default {
@@ -79,40 +80,93 @@
     data: () => ({
       posterAvatar: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
       poster: 'XiaoMing',
-      id: 0,
-      partition: '嵌入式技术交流区',
-      time: '2019/2/17',
-      postDetail: '<p>帖子一的内容</p>',
+      theme: '',
+      section_id: null,
+      content: '',
+      create_time: '',
       dialog: false,
       answers: [
-        {
-          id: 1,
-          responder: 'XiaoPeng',
-          responderAvatar: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
-          floornum: '第一楼',
-          time: '2019/2/18',
-          content: '<p>我是一楼</p>',
-          vote: 177
-        },
-        {
-          id: 2,
-          responder: '  Bill',
-          responderAvatar: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
-          floornum: '第二楼',
-          time: '2019/2/18',
-          content: '<p>我是二楼</p>',
-          vote: 94
-        },
-        {
-          id: 3,
-          responder: 'XiaoHong',
-          responderAvatar: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
-          floornum: '第三楼',
-          time: '2019/2/18',
-          content: '<p>我是三楼</p>',
-          vote: 84
-        },
+        // {
+        //   responder: 'XiaoPeng',
+        //   responderAvatar: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
+        //   floornum: '第一楼',
+        //   content: '',
+        //   create_time: '',
+        //   vote: 177
+        // },
+        // {
+        //   responder: '  Bill',
+        //   responderAvatar: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
+        //   floornum: '第二楼',
+        //   content: '',
+        //   create_time: '',
+        //   vote: 94
+        // },
+        // {
+        //   responder: 'XiaoHong',
+        //   responderAvatar: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
+        //   floornum: '第三楼',
+        //   content: '',
+        //   create_time: '',
+        //   vote: 84
+        // },
       ]
-    })
+    }),
+    methods:{
+      PostDetailGet: function() {
+        let aid = this.$route.params.id;
+        let self = this;
+        axios.get('http://127.0.0.1:8000/api/PostVieweSet/${aid}/'
+        ).
+        then(function(response) {
+          console.log(response)
+          self.content = response.data.content;
+          self.create_time = response.data.create_time;
+          self.section_id = response.data.section;
+        }).
+        catch(function(error) {
+          console.log(error);
+        });
+        axios.get('http://127.0.0.1:8000/api/PostCommentVieweSet/?post_id=${aid}/'
+        ).
+        then(function(response) {
+          console.log(response)
+          self.answers.content = response.data.content;
+          self.answers.create_time = response.data.create_time;
+        }).
+        catch(function(error) {
+          console.log(error);
+        });
+        axios.get('http://127.0.0.1:8000/api/SectionViewSet/self.section_id'
+        ).
+        then(function(response) {
+          console.log(response)
+          self.theme = response.data.theme;
+        }).
+        catch(function(error) {
+          console.log(error);
+        });
+      },
+      // PostSetPost: function() {
+      // let self = this;
+      // let myDate = new Date();
+      // axios.post('http://127.0.0.1:8000/api/PostCommentViewSet/', {
+      //   'post_id': globalData.state.userId,
+      //   'author_id': 12,
+      //   'user_name': globalData.state.nickname,
+      //   'article_time': myDate.toLocaleString('chinese', {hour12: false}).replace(/\//g,"-"),
+      //   'title': self.articleTitle,
+      //   'content': self.editorContent,
+      // }).
+      // then(function(response){
+      //   self.dialog = true;
+      // }).
+      // catch(function(error) {
+      //   console.log(error);
+      // });
+    },
+    mounted() {
+      this.PostDetailGet();
+    }
   }
 </script>

@@ -37,8 +37,8 @@ export default {
           id: 0,
           name: '公告 / 新闻',
           items: [
-            {id: 0, title: '公告', subtitle: '公告一', action: '2019/1/7', iconClass: 'info white--text', icon: 'announcement', link: '/announmentcelists/new'},
-            {id: 1, title: '活动与新闻', subtitle: '活动与新闻一', action: '2019/1/7', iconClass: 'info white--text', icon: 'local_activity', link: '/activitynews/new'},
+            {id: 0, title: '公告', subtitle: '公告一', action: '2019/1/7', iconClass: 'info white--text', icon: 'announcement', link: '/announmentcelists'},
+            {id: 1, title: '活动与新闻', subtitle: '活动与新闻一', action: '2019/1/7', iconClass: 'info white--text', icon: 'local_activity', link: '/activitynews'},
           ]
         },
         {

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 
 export default {
 
@@ -36,24 +36,23 @@ export default {
     }
   },
   methods: {
-//     GetArticleContent: function() {
-//       // console.log(this.$route.params.id)
-//       let aid = this.$route.params.id;
-//       let self = this;
-//       axios.get(`${'https://cors-anywhere.herokuapp.com/'}http://www.aait-suse.cn/api/ArticleViewSet/${aid}/`)
-//       .then(function(response) {
-//         self.content = response.data.content;
-//         self.author = response.data.user_name;
-//         self.title = response.data.title;
-//         self.time = response.data.article_time;
-//       })
-//       .catch(function(error) {
-//         alert('获取文章出现错误。请将以下内容发送给 @蔡仲晨 进行分析：\n' + error);
-//       });
-//     }
-//   },
-//   mounted() {
-//     this.GetArticleContent();
+    GetArticleContent: function() {
+      let aid = this.$route.params.id;
+      let self = this;
+      axios.get('http://127.0.0.1:8000/api/ArticleViewSet/${aid}/')
+      .then(function(response) {
+        self.content = response.data.content;
+        self.author = response.data.anthor_name;
+        self.title = response.data.topic;
+        self.time = response.data.create_time;
+      })
+      .catch(function(error) {
+        alert('获取文章出现错误。请将以下内容发送给 @蔡仲晨 进行分析：\n' + error);
+      });
+    }
+  },
+  mounted() {
+    this.GetArticleContent();
   }
 }
 </script>
