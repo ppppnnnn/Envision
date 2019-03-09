@@ -45,10 +45,10 @@ export default {
           id: 1,
           name: '技术交流',
           items: [
-            {id: 0, title: '嵌入式技术交流区', subtitle: '帖子一', action: '2019/1/7', iconClass: 'info white--text', icon: 'settings_input_composite', link: '/postlist/+id'},
-            {id: 1, title: '软件技术交流区', subtitle: '帖子一', action: '2019/1/7', iconClass: 'info white--text', icon: 'code', link: '/postlist/+id'},
-            {id: 2, title: '机器人技术交流区', subtitle: '帖子一', action: '2019/1/7', iconClass: 'info white--text', icon: 'adb', link: '/postlist/+id'},
-            {id: 3, title: '生活轶事交流区', subtitle: '帖子一', action: '2019/1/7', iconClass: 'info white--text', icon: 'free_breakfast', link: '/postlist/+id'},
+            {id: 0, title: '嵌入式技术交流区', subtitle: '帖子一', action: '2019/1/7', iconClass: 'info white--text', icon: 'settings_input_composite', link: '/postlist/0'},
+            {id: 1, title: '软件技术交流区', subtitle: '帖子一', action: '2019/1/7', iconClass: 'info white--text', icon: 'code', link: '/postlist/1'},
+            {id: 2, title: '机器人技术交流区', subtitle: '帖子一', action: '2019/1/7', iconClass: 'info white--text', icon: 'adb', link: '/postlist/2'},
+            {id: 3, title: '生活轶事交流区', subtitle: '帖子一', action: '2019/1/7', iconClass: 'info white--text', icon: 'free_breakfast', link: '/postlist/3'},
           ]
         },
       ]
