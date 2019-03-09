@@ -13,7 +13,7 @@
         class="white--text"
         height="200px"
         :src=topNewsImg
-        @click=""
+        @click=";"
       >
         <v-container fill-height fluid>
           <v-layout fill-height>

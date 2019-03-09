@@ -9,7 +9,6 @@
     style="z-index: 1"
     :mini-variant="mini"
   >
-
     <v-toolbar flat class="transparent">
       <v-list class="pa-0" dense>
         <v-list-tile>
@@ -24,7 +23,6 @@
         <v-divider></v-divider>
       </v-list>
     </v-toolbar>
-
     <v-list dense class="grey lighten-4">
       <template v-for="(item, i) in items">
         <v-layout row v-if="item.heading" align-center :key="i">
@@ -35,7 +33,7 @@
           </v-flex>
         </v-layout>
         <v-divider dark v-else-if="item.divider" class="my-3" :key="i"></v-divider>
-        <v-list-tile :key="i" v-else @click="">
+        <v-list-tile :key="i" v-else :to="item.link">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -59,12 +57,11 @@ export default {
       { heading: '视图' },
       { icon: 'home', text: '首页' },
       { icon: 'school', text: '学习' },
-      { icon: 'forum', text: '论坛' },
-      { icon: 'public', text: '探索' },
-      { icon: 'person', text: '个人中心' },
-      { icon: 'create', text: '创作' },
+      { icon: 'forum', text: '论坛', link: '/forum/new' },
+      { icon: 'public', text: '探索', link: '/explore/dynamic' },
+      { icon: 'person', text: '个人中心', link: '/person/new' },
       { icon: 'group', text: '群组' },
-      { icon: 'shopping_cart', text: '礼品店' },
+      { icon: 'shopping_cart', text: '礼品店', link: '/giftshop' },
       { icon: 'assignment', text: '社团事务' },
       { icon: 'build', text: '管理后台' },
       { divider: true },

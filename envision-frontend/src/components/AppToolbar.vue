@@ -52,7 +52,7 @@
           v-for="(item, index) in menuItems"
           :key="index"
           avatar
-          @click=""
+          @click=";"
         >
           <v-list-tile-avatar>
             <v-icon>{{ item.icon }}</v-icon>
