@@ -127,7 +127,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model   =  User
-        fields  =  ('username','e_mail','password')
+        fields  =  ('username','e_mail','password','user_logo')
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
