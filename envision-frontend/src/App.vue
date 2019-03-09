@@ -1,7 +1,58 @@
 <template>
   <v-app>
-    <app-toolbar></app-toolbar>
-    <app-side-menu></app-side-menu>
+    <app-toolbar :isUserLogged=isUserLogged :ShowLoginDialog=ShowLoginDialog></app-toolbar>
+    <app-side-menu v-if="isUserlogged"></app-side-menu>
+
+    <v-dialog
+      v-model="loginDialog"
+      max-width="450"
+      dark
+    >
+      <v-card>
+        <v-card-title class="headline">{{ loginWindowTitle }}</v-card-title>
+
+        <v-card-text>{{ loginWindowText }} </v-card-text>
+
+        <v-card-text>
+          <v-text-field
+            label="用户名"
+            box
+            color="amber"
+            dense
+            :hint="hintUsername"
+          ></v-text-field>
+          <v-text-field
+            label="密码"
+            :type="passwordInputType"
+            :append-icon="showPassword ? 'visibility' : 'visibility_off'"
+            @click:append="TogglePasswordVisibility"
+            box
+            dense
+            color="amber"
+            :hint="hintPassword"
+          ></v-text-field>
+        </v-card-text>
+
+        <v-card-actions>  
+          <v-btn
+            color="yellow darken-1"
+            flat="flat"
+            @click="ToggleLoginWindowContent"
+          >
+            {{ loginWindowBtnLeft }}
+          </v-btn>
+
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="yellow darken-1"
+            flat="flat"
+          >
+            {{ loginWindowBtnRight }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <v-content style="padding-right: 300px;">
       <v-container fluid>
@@ -32,7 +83,16 @@ export default {
   },
   data () {
     return {
-      //
+      isUserLogged: false,
+      loginDialog: false,
+      showPassword: false,
+      passwordInputType: "password",
+      loginWindowTitle: "登录 Envision",
+      loginWindowBtnLeft: "没有账号？注册一个",
+      loginWindowBtnRight: "登录",
+      loginWindowText: "在不登录Envision的情况下，您只能访问有限的内容。登录 Envision 来让我们更好的为你服务。",
+      hintUsername: "",
+      hintPassword: "",
     }
   },
   mounted() {
@@ -44,6 +104,36 @@ export default {
     //   console.log(error)
     // })
   },
+  methods: {
+    ShowLoginDialog: function() {
+      this.loginDialog = true;
+    },
+    TogglePasswordVisibility: function() {
+      if(this.passwordInputType === "password") {
+        this.passwordInputType = "text";
+      } else {
+        this.passwordInputType = "password";
+      }
+      this.showPassword = !this.showPassword;
+    },
+    ToggleLoginWindowContent: function() {
+      if(this.loginWindowTitle === "登录 Envision") {
+        this.loginWindowTitle = "注册 Envision";
+        this.loginWindowBtnLeft = "已有账号？去登录";
+        this.loginWindowBtnRight = "注册";
+        this.loginWindowText = "欢迎您注册 Envision 。注册一旦完成，Envision 会记住你的登录状态。";
+        this.hintUsername = "用户名可以是汉字、字母和数字";
+        this.hintPassword = "密码的长度至少是8位";
+      } else {
+        this.loginWindowTitle = "登录 Envision";
+        this.loginWindowBtnLeft = "没有账号？注册一个";
+        this.loginWindowBtnRight = "登录";
+        this.loginWindowText = "在不登录Envision的情况下，您只能访问有限的内容。登录 Envision 来让我们更好的为你服务。";
+        this.hintUsername = "";
+        this.hintPassword = "";
+      }
+    }
+  }
 }
 </script>
 

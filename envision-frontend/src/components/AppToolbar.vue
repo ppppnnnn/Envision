@@ -4,7 +4,7 @@
     <v-spacer></v-spacer>
 
     <v-menu>
-      <v-btn icon slot="activator">
+      <v-btn icon slot="activator" v-if="isUserLogged == true">
         <v-icon>create</v-icon>
       </v-btn>
       <v-list dense>
@@ -18,7 +18,7 @@
       </v-list>
     </v-menu>
   
-    <v-tooltip bottom>
+    <v-tooltip bottom v-if="isUserLogged == true">
       <v-btn icon slot="activator">
         <v-badge left overlap color=red>
           <span slot="badge">!</span>
@@ -28,7 +28,14 @@
       <span>通知</span>
     </v-tooltip>
 
-    <v-menu>
+    <v-tooltip bottom v-if="isUserLogged == false">
+      <v-btn icon slot="activator" @click="ShowLoginDialog">
+        <v-icon>account_circle</v-icon>
+      </v-btn>
+      <span>登录/注册</span>
+    </v-tooltip>
+
+    <v-menu v-if="isUserLogged == true">
       <v-btn slot="activator" fab flat small>
         <v-tooltip bottom>
           <v-avatar color="grey lighten-4" :size=40 slot="activator">
@@ -68,8 +75,11 @@
 
 <script>
 export default {
+  props: {
+    isUserLogged: Boolean,
+    ShowLoginDialog: Function,
+  },
   data: () => ({
-    isUserLogged: true,
     avatarHash: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
     userColorTheme: 'amber',
     username: 'Owen Tsai',
