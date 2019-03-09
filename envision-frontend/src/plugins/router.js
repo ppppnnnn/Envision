@@ -32,6 +32,7 @@ const postdetail = () => import('@/views/PostDetail');
 const question = () => import('@/views/QuestionDetail');
 const questions = () => import('@/views/Questions');
 const shoppingdetail = () => import('@/views/ShoppingDetail');
+//const home = () => import('@/views/Home');
 
 const routes = [
   {
@@ -136,15 +137,15 @@ const routes = [
     component: postlist
   },
   {
-    path: '/postdetail',
+    path: '/postdetail/:id',
     component: postdetail
   },
   {
-    path: '/announcementdetail',
+    path: '/announcementdetail/:id',
     component: announcementdetail
   },
   {
-    path: '/activitynewsdetail',
+    path: '/activitynewsdetail/:id',
     component: activitynewsdetail
   },
   {
