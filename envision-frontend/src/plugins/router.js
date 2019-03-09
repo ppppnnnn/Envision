@@ -27,6 +27,7 @@ const postdetail = () => import('@/views/PostDetail');
 const question = () => import('@/views/QuestionDetail');
 const questions = () => import('@/views/Questions');
 const shoppingdetail = () => import('@/views/ShoppingDetail');
+const home = () => import('@/views/Home');
 
 const routes = [
   {
@@ -89,11 +90,11 @@ const routes = [
     component: question
   },
   {
-    path: '/forum/new',
+    path: '/forum',
     component: forum
   },
   {
-    path: '/person/new',
+    path: '/person',
     component: person
   },
   {

@@ -53,6 +53,7 @@
           :key="index"
           avatar
           @click=";"
+          :to="item.link"
         >
           <v-list-tile-avatar>
             <v-icon>{{ item.icon }}</v-icon>
@@ -74,14 +75,14 @@ export default {
     username: 'Owen Tsai',
     userDescription: '2015级自动化3班',
     menuItems: [
-      { title: '个人中心', icon: 'person' },
-      { title: '我的草稿', icon: 'subject' },
-      { title: '关注内容', icon: 'stars' },
-      { title: '系统设置', icon: 'settings' },
-      { title: '退出登录', icon: 'exit_to_app' },
+      { title: '个人中心', icon: 'person', link: '/user/new' },
+      { title: '我的草稿', icon: 'subject' , link: '/home/new' },
+      { title: '关注内容', icon: 'stars' , link: '/giftshop/new'},
+      { title: '系统设置', icon: 'settings' , link: '/explore/new'},
+      { title: '退出登录', icon: 'exit_to_app' , link: '/home/new'},
     ],
     createItems: [
-      { title: '新文章', link: '/articles/new' },
+      { title:'新文章', link: '/articles/new' },
       { title: '新帖子', link: '/posts/new' },
       { title: '新问题', link: '/questions/new' },
       { title: '从草稿创建', link: '/draft' }

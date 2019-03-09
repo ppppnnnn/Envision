@@ -33,7 +33,7 @@
           </v-flex>
         </v-layout>
         <v-divider dark v-else-if="item.divider" class="my-3" :key="i"></v-divider>
-        <v-list-tile :key="i" v-else :to="item.link">
+        <v-list-tile :key="i" v-else  :to="item.link">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -55,11 +55,11 @@ export default {
     mini: false,
     items: [
       { heading: '视图' },
-      { icon: 'home', text: '首页' },
+      { icon: 'home', text: '首页', link:'/home/new' },
       { icon: 'school', text: '学习' },
-      { icon: 'forum', text: '论坛', link: '/forum/new' },
+      { icon: 'forum', text: '论坛', link: '/forum' },
       { icon: 'public', text: '探索', link: '/explore/dynamic' },
-      { icon: 'person', text: '个人中心', link: '/person/new' },
+      { icon: 'person', text: '个人中心', link: '/person' },
       { icon: 'group', text: '群组' },
       { icon: 'shopping_cart', text: '礼品店', link: '/giftshop' },
       { icon: 'assignment', text: '社团事务' },
