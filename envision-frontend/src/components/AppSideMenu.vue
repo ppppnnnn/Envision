@@ -64,7 +64,7 @@ export default {
       { icon: 'person', text: '个人中心'},
       { icon: 'create', text: '创作' },
       { icon: 'group', text: '群组'},
-      { icon: 'shopping_cart', text: '礼品店',  },
+      { icon: 'shopping_cart', text: '礼品店'},
       { icon: 'assignment', text: '社团事务' },
       { icon: 'build', text: '管理后台' },
       { divider: true },
