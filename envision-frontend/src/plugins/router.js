@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Questions from "../views/Questions";
 
 Vue.use(VueRouter);
 
@@ -12,6 +11,7 @@ const newPost = () => import('@/views/NewPost');
 const newQuestion = () => import('@/views/NewQuestion');
 const question = () => import('@/views/Question');
 const questions = () => import('@/views/Questions');
+const home = () => import('@/views/Home');
 
 
 const routes = [
@@ -54,7 +54,11 @@ const routes = [
     path: '/question/:id',
     name: 'questionDetail',
     component: question
-  }
+  },
+  {
+    path: '/home/new',
+    component: home
+  },
 ];
 
 const router = new VueRouter({
