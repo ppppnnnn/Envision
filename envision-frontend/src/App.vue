@@ -3,11 +3,7 @@
     <app-toolbar :isUserLogged=isUserLogged :ShowLoginDialog=ShowLoginDialog></app-toolbar>
     <app-side-menu :isUserLogged=isUserLogged></app-side-menu>
 
-    <v-dialog
-      v-model="loginDialog"
-      max-width="450"
-      dark
-    >
+    <v-dialog v-model="loginDialog" max-width="450" dark>
       <v-card>
         <v-card-title class="headline">{{ loginWindowTitle }}</v-card-title>
 
@@ -61,6 +57,24 @@
       </v-card>
     </v-dialog>
 
+    <v-dialog v-model="dialogLoginFailure" max-width="290">
+      <v-card>
+        <v-card-title class="headline">用户名或密码错误</v-card-title>
+        <v-card-text>
+          用户名或密码错误，登录未能成功。
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="dialogRegFailure" max-width="290">
+      <v-card>
+        <v-card-title class="headline">用户名或邮箱已被注册</v-card-title>
+        <v-card-text>
+          您填写的用户名或者邮箱已经被注册过，注册未能成功。
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <v-content style="padding-right: 300px;">
       <v-container fluid>
         <v-layout>
@@ -81,6 +95,7 @@ import AppSideMenu from './components/AppSideMenu'
 import AppRightSidePanel from './components/AppRightSidePanel'
 import axios from 'axios'
 import router from './plugins/router'
+import storage from './plugins/storage'
 
 export default {
   name: 'App',
@@ -111,7 +126,8 @@ export default {
     let status = this.CheckLoginStatus();
 
     if(status === true) {
-      //TODO: set global data
+      storage.commit('setUserId', window.localStorage.getItem(envision_uid));
+      storage.commit('setUsername', window.localStorage.getItem(envision_user));
       this.isUserLogged = true;
     } else {
       this.isUserLogged = false;
@@ -148,7 +164,6 @@ export default {
     },
     CheckLoginStatus: function() {
       if(window.localStorage.getItem("envision_user") != null) {
-        //user has logged
         return true;
       } else {
         return false;
@@ -163,9 +178,14 @@ export default {
       .then(function (response) {
         console.log(response);
         if(response.data.msg == "Succeeded") {
-          // successfully logged in
+          // successfully logged in, write ID and username into localstorage
+          window.localStorage.setItem("envision_uid", "");
+          window.localStorage.setItem("envision_user", self.inputUsername);
           // refresh page
           router.go('/');
+        } else {
+          // name or password wrong
+          dialogLoginFailure = true;
         }
       })
       .catch(function (error) {
@@ -183,7 +203,13 @@ export default {
         console.log(response);
         if(response.data.msg == "Succeeded") {
           // successfully registered
-
+          //TODO: get ID and username, write into localstorage
+          window.localStorage.setItem("envision_uid", "");
+          window.localStorage.setItem("envision_user", self.inputUsername);
+          router.go('/');
+        } else {
+          // name or email has already been registered
+          dialogRegFailure = true;
         }
       })
       .catch(function (error) {

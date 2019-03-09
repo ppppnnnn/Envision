@@ -16,4 +16,6 @@ const storage = Vuex.Store({
 			state.username = value;
 		}
 	}
-})
+});
+
+export default storage;
