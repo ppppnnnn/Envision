@@ -1,9 +1,9 @@
 <template>
-  <v-toolbar :color="userColorTheme" app clipped-left fixed>
+  <v-toolbar color="amber" app clipped-left fixed>
     <span class="title ml-3 mr-5">Envision&nbsp;<span class="slim-text">Web</span></span>
     <v-spacer></v-spacer>
 
-    <v-menu>
+    <v-menu v-if="isUserLogged == true">
       <v-btn icon slot="activator">
         <v-icon>create</v-icon>
       </v-btn>
@@ -18,7 +18,7 @@
       </v-list>
     </v-menu>
   
-    <v-tooltip bottom>
+    <v-tooltip bottom v-if="isUserLogged == true">
       <v-btn icon slot="activator">
         <v-badge left overlap color=red>
           <span slot="badge">!</span>
@@ -28,7 +28,12 @@
       <span>通知</span>
     </v-tooltip>
 
-    <v-menu>
+    <v-btn outline large @click="ShowLoginDialog" v-if="isUserLogged == false">
+      <v-icon>account_circle</v-icon> 
+      <span class="font-weight-bold"> &nbsp;登录/注册</span>
+    </v-btn>
+
+    <v-menu v-if="isUserLogged == true">
       <v-btn slot="activator" fab flat small>
         <v-tooltip bottom>
           <v-avatar color="grey lighten-4" :size=40 slot="activator">
@@ -52,6 +57,7 @@
           v-for="(item, index) in menuItems"
           :key="index"
           avatar
+          @click=";"
           :to="item.link"
         >
           <v-list-tile-avatar>
@@ -67,11 +73,14 @@
 
 <script>
 export default {
+  props: {
+    isUserLogged: Boolean,
+    ShowLoginDialog: Function,
+    username: String,
+    userDescription: String,
+    avatarHash: String
+  },
   data: () => ({
-    isUserLogged: true,
-    avatarHash: 'https://vuetifyjs.com/apple-touch-icon-180x180.png',
-    userColorTheme: 'amber',
-    username: 'Owen Tsai',
     userDescription: '2015级自动化3班',
     menuItems: [
       { title: '个人中心', icon: 'person', link: '/user/new' },

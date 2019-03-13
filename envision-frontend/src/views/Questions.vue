@@ -1,32 +1,31 @@
 <template>
   <div>
-    <p class="display-1">直答<span class="font-weight-thin"> Direct Answer</span></p>
+    <!-- <p class="display-1">直答<span class="font-weight-thin"> Direct Answer</span></p>
 
     <div class="question-tags">
       <p>按标签筛选：</p>
 
-    </div>
-
+    </div> -->
     <div class="question-list">
-      <v-card v-for="item in questions" :key="item.id" class="mb-2">
+      <v-card v-for="question in questions" :key="question.id" class="mb-2">
         <v-card-title primary-title class="question-title">
           <div>
-            <div class="headline">{{ item.title }}</div>
-            <span class="grey--text">由 {{ item.po }} 在 {{ item.time }} 提出, 已有 {{ item.answerCount }} 个回答</span>
+            <div class="headline">{{ question.title }}</div>
+            <span class="grey--text">由 {{ question.po }} 在 {{ question.time }} 提出, 已有 {{ question.answerCount }} 个回答</span>
           </div>
         </v-card-title>
 
         <v-card-text>
           <v-layout row wrap>
-            <v-flex xs12 v-if="item.image == null">
-              <span class="font-weight-bold">{{ item.topResponder }}</span> : {{ item.answer }}
+            <v-flex xs12 v-if="question.image == null">
+              <span class="font-weight-bold">{{ question.topResponder }}</span> : {{ question.answer }}
             </v-flex>
-            <v-flex xs8 v-if="item.image != null" class="question-text">
-              <span class="font-weight-bold">{{ item.topResponder }}</span> : {{ item.answer }}
+            <v-flex xs8 v-if="question.image != null" class="question-text">
+              <span class="font-weight-bold">{{ question.topResponder }}</span> : {{ question.answer }}
             </v-flex>
-            <v-flex xs4 v-if="item.image != null">
+            <v-flex xs4 v-if="question.image != null">
               <v-img
-                :src="item.image"
+                :src="question.image"
                 aspect-ratio="2.5"
               ></v-img>
             </v-flex>
@@ -35,7 +34,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat color="success">查看详情</v-btn>
+          <v-btn flat color="success" :to="/question/ +question.question_id ">查看详情</v-btn>
         </v-card-actions>
       </v-card>
     </div>
@@ -47,7 +46,7 @@ export default {
   data:() => ({
     questions: [
       {
-        id: 1,
+        question_id: 1,
         title: '什么是直答？',
         po: 'James White',
         time: '2019/2/17',
@@ -57,7 +56,7 @@ export default {
         answer: '「直答」是 Envision 最新推出的一项服务，旨在为了在保证人工智能技术协会热情互助的氛围的前提下，鼓励大家自己探索解决问题的方式方法。在「直答中」任何用户都可以提出一个问题，并就这个问题邀请另外的 Envision 用户进行回答...',
       },
       {
-        id: 2,
+        question_id: 2,
         title: '如何使用Python入门，进行机器学习？',
         po: '路人甲',
         time: '2019/2/18',
@@ -67,7 +66,7 @@ export default {
         answer: '我来举个实际的例子吧。比如你想要写一个Python程序来自动识别图片中是否存在山河风景，那么你首先需要大量的模型用于程序的训练。比如如图所示的这张图片，首先，你需要...'
       },
       {
-        id: 3,
+        question_id: 3,
         title: '请问这段代码出了什么问题？',
         po: 'Tom Taylor',
         time: '2019/2/14',

@@ -29,7 +29,7 @@
         <v-btn block>保存为草稿</v-btn>
       </v-flex>
       <v-flex class="px-4">
-        <v-btn color="info" block>发表文章</v-btn>
+        <v-btn color="info" block @click="NewArticle()">发表文章</v-btn>
       </v-flex>
     </v-layout>
   </div>
@@ -37,6 +37,8 @@
 
 <script>
   import envisionEditor from '@/components/TextEditorFull'
+  import axios from 'axios'
+  import storage from '@/plugins/storage';
 
   export default {
     components: {
@@ -44,6 +46,24 @@
     },
     data: () => ({
       tags: [],
-    })
+    }),
+    methods: {
+      NewArticle: function() {
+        let self = this;
+        let myDate = new Date();
+        axios.post('http://127.0.0.1:8000/api/ArticleCommentViewSet/', {
+          'author_id': storage.state.uid,
+          'create_time': myDate.toLocaleString('chinese', {hour12: false}).replace(/\//g,"-"),
+          'tag': self.tags,
+          'topic': self.articleTitle,
+          'content': self.editorContent,
+        }).
+        then(function(response){
+        }).
+        catch(function(error) {
+          console.log(error);
+        });     
+      },
+    }
   }
 </script>
